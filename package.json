@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "name": "@nfreear/survey-bot",
+  "license": "proprietary",
+  "repository": "https://github.com/nfreear/survey-bot.git",
+  "engines": {
+    "node": "15.x"
+  },
+  "dependencies": {
+    "@nlpjs/basic": "^4.22.0",
+    "@nlpjs/directline-connector": "^4.22.0",
+    "@nlpjs/express-api-server": "^4.22.0",
+    "@nlpjs/msbf-connector": "^4.22.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}

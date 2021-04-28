@@ -1,0 +1,27 @@
+{
+  "#": "NLP.js chat-bot configuration.",
+
+  "X_pathPipelines": "./bot/pipelines.md",
+
+  "pathPlugins": "./src/plugins",
+
+  "settings": {
+    "nlp": {
+      "corpora": [
+        "./bot/corpus-en.json"
+      ]
+    },
+
+    "console": {
+      "debug": true
+    },
+
+    "api-server": {
+      "clientPath": "./public",
+      "port": 3000,
+      "serveBot": true
+    }
+  },
+
+  "use": [ "Basic", "ConsoleConnector" ]
+}

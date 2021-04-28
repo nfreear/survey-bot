@@ -1,0 +1,17 @@
+{
+  "#": "...",
+
+  "locale": "en-US",
+
+  "intro": "",
+
+  "signoff": "OK. You'd like to end the survey.",
+
+  "questionTemplate": "Question {N} of {M}. {Q}",
+
+  "questions": [
+    "What is your name?",
+    "What is your age?",
+    "Say: 'If you can keep your head when all about you'"
+  ]
+}
