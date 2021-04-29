@@ -102,39 +102,46 @@ class SurveyBot extends Clonable { // PluginBase {
   }
 
   initialize () {
-    const directlineCon = this.container.get('directline');
+    const directlineCon = this.directlineCon = this.container.get('directline');
 
     console.log('DL connector:', directlineCon);
 
-    directlineCon.onCreateConversation = (ctr, result) => {
-      console.log('onCreateConversation:', result);
-
-      const srcAct = {
-        // type: 'message',
-        // text: 'Greetings! [createConv]',
-        locale: 'en-US',
-        conversation: { id: result.conversationId }
-      };
-
-      const typingAct = {
-        type: 'typing',
-        conversation: { id: result.conversationId }
-      }
+    directlineCon.onCreateConversation = (ctr, conv) => {
+      console.log('onCreateConversation:', conv);
 
       this.introTexts.forEach(text => {
-        directlineCon.say(srcAct, text);
-        directlineCon.say(typingAct);
+        this.say(conv, text);
+        this.sendTyping(conv);
       });
 
-      const srcEvent = {
-        type: 'event',
-        name: 'myCustomEvent',
-        value: { myData: 1 },
-        conversation: { id: result.conversationId }
-      };
-
-      directlineCon.say(srcEvent);
+      this.sendEvent(conv);
     };
+  }
+
+  say (conv, text) {
+    this.directlineCon.say({
+      // type: 'message',
+      // text: 'Greetings! [createConv]',
+      locale: 'en-US',
+      conversation: { id: conv.conversationId }
+    },
+    text);
+  }
+
+  sendTyping (conv) {
+    this.directlineCon.say({
+      type: 'typing',
+      conversation: { id: conv.conversationId }
+    });
+  }
+
+  sendEvent (conv, name, value) {
+    this.directlineCon.say({
+      type: 'event',
+      name: name || 'myCustomEvent',
+      value: value || { myData: 1 },
+      conversation: { id: conv.conversationId }
+    });
   }
 }
 
