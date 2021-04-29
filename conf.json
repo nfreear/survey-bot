@@ -20,8 +20,17 @@
       "clientPath": "./public",
       "port": 3000,
       "serveBot": true
+    },
+
+    "msbf": {
+      "apiPath": "",
+      "messagesPath": "/api/messages",
+      "X_appId": "<YOUR MICROSOFT BOT APP ID>",
+      "X_appPassword": "<YOUR MICROSOFT BOT PASSWORD>"
     }
   },
 
-  "use": [ "Basic", "ConsoleConnector" ]
+  "use": [ "Basic", "ConsoleConnector", "ExpressApiServer", "DirectlineConnector" ],
+
+  "X_not_used": [ "MsbfConnector" ]
 }

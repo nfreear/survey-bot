@@ -4,6 +4,7 @@
 nlp.train
 console.say "Hi, I'm a Survey Bot"
 console.say "To start the survey, say 'Go'"
+// directline.say "Well, hello!"
 
 ## console.hear
 // compiler=javascript
@@ -36,3 +37,6 @@ surveyBot
 ## onIntent(None)
 surveyBot
 ->output.text
+
+## directline.hear
+->"HELLO"

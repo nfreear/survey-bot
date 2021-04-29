@@ -3,7 +3,10 @@
 
   "locale": "en-US",
 
-  "intro": "",
+  "introTexts": [
+    "Welcome to the Survey Bot!",
+    "To get started say or type 'Go'"
+  ],
 
   "signoff": "OK. You'd like to end the survey.",
 

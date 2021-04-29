@@ -3,6 +3,9 @@
  *
  * @author  NDF, 28-April-2021.
  * @author  NDF, 25-Feb-2020.
+ *
+ * @see Activity schema :~
+ * https://github.com/microsoft/botframework-sdk/blob/master/specs/botframework-activity/botframework-activity.md
  */
 
 const SURVEY = require('../../bot/survey-en.json');
@@ -22,11 +25,13 @@ class SurveyBot extends Clonable { // PluginBase {
     container
     );
 
-    // this.initNerManager();
+    this.initialize();
 
     this.name = 'surveyBot';
 
     this.answerRegex = ANSWER_REGEX;
+
+    this.introTexts = SURVEY.introTexts;
     this.questionTemplate = SURVEY.questionTemplate;
     this.questions = SURVEY.questions;
     this.signoff = SURVEY.signoff;
@@ -62,6 +67,7 @@ class SurveyBot extends Clonable { // PluginBase {
     console.log(input);
 
     let response = 'Woops!';
+    let metaData = null;
 
     switch (input.intent) {
       case 'survey.start':
@@ -93,6 +99,42 @@ class SurveyBot extends Clonable { // PluginBase {
     // this.logToFile(input);
 
     return input;
+  }
+
+  initialize () {
+    const directlineCon = this.container.get('directline');
+
+    console.log('DL connector:', directlineCon);
+
+    directlineCon.onCreateConversation = (ctr, result) => {
+      console.log('onCreateConversation:', result);
+
+      const srcAct = {
+        // type: 'message',
+        // text: 'Greetings! [createConv]',
+        locale: 'en-US',
+        conversation: { id: result.conversationId }
+      };
+
+      const typingAct = {
+        type: 'typing',
+        conversation: { id: result.conversationId }
+      }
+
+      this.introTexts.forEach(text => {
+        directlineCon.say(srcAct, text);
+        directlineCon.say(typingAct);
+      });
+
+      const srcEvent = {
+        type: 'event',
+        name: 'myCustomEvent',
+        value: { myData: 1 },
+        conversation: { id: result.conversationId }
+      };
+
+      directlineCon.say(srcEvent);
+    };
   }
 }
 
