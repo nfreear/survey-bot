@@ -1,5 +1,8 @@
 {
-  "#": "...",
+  "#": [
+
+    "https://www.poetryfoundation.org/poems/46473/if---"
+  ],
 
   "locale": "en-US",
 
@@ -15,6 +18,6 @@
   "questions": [
     "What is your name?",
     "What is your age?",
-    "Say: 'If you can keep your head when all about you'"
+    "Read: 'If you can keep your head when all about you Are losing theirs …'"
   ]
 }

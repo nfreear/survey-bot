@@ -33,6 +33,10 @@ surveyBot
 surveyBot
 ->output.text
 
+## onIntent(survey.answer)
+surveyBot
+->output.text
+
 ## onIntent(None)
 surveyBot
 ->output.text

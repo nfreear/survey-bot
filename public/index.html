@@ -1,4 +1,8 @@
-<!doctype html><html lang="en"> <title>Survey-Bot</title>
+<!doctype html><html lang="en"><meta charset="utf-8"><title>Survey-Bot</title>
+
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+
+<link rel="stylesheet" href="styles/app.css" />
 
 <script
   crossorigin="anonymous"
@@ -10,36 +14,23 @@
   src="https://unpkg.com/simple-update-in/dist/simple-update-in.production.min.js"
 ></script> -->
 
-<style>
-  html,
-  body {
-    height: 100%;
-  }
 
-  body {
-    background: #f8f8f8;
-    margin: 0 auto;
-    max-width: 33rem;
-  }
+<form id="bot-form" class="bot-form">
+  <p>
+    <label for="timeout">Timeout in seconds</label>
 
-  button { cursor: pointer; }
+    <input id="timeout" type="number" value="2.0" min="0" max="30" step="0.5" pattern="\d+(\.\d+)?" />
 
-  #webchat {
-    border-left: 2px solid #aaa;
-    border-right: 2px solid #aaa;
-    height: 100%;
-    width: 100%;
-  }
-
-  #webchat .webchat__send-box__main {
-    border-color: #aaa
-  }
-</style>
+    <button type="submit">Launch the Bot</button>
+  </p>
+</form>
 
 
 <div id="webchat" role="main"></div>
 
 
-<script src="js/launch-bot.js"></script>
+<script type="module" src="js/app.js"></script>
+
+<script data-X-src="js/launch-bot.js"></script>
 
 </html>

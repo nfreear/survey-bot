@@ -1,5 +1,5 @@
 {
-  "name": "Name of the corpus",
+  "name": "Survey-bot corpus",
   "locale": "en-US",
 
   "data": [
@@ -46,6 +46,19 @@
       "utterances": [
         "Ask again",
         "Repeat question"
+      ]
+    },
+
+    {
+      "intent": "survey.answer",
+      "utterances": [
+        "i'm nick",
+        "I'm called Nick",
+        "My name is Tom",
+        "I'm forty",
+        "I'm forty-five",
+        "35",
+        "If you can keep your head when all about you Are losing theirs"
       ]
     }
   ]

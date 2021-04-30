@@ -1,27 +1,47 @@
 /*!
-
+  NDF, 28-April-2021.
 */
 
 const WebChat = window.WebChat;
 // const simpleUpdateIn = window.simpleUpdateIn;
 
-launchBot();
+const QUESTION_REGEX = /(.+)` ?qid=(\d+)`/;
 
-function launchBot () {
+export function launchBot () {
   // https://github.com/microsoft/BotFramework-WebChat/issues/2377#issuecomment-527895197
   // https://github.com/microsoft/BotFramework-WebChat/tree/main/samples/04.api/b.piggyback-on-outgoing-activities#
   // https://github.com/microsoft/BotFramework-WebChat/issues/2555#issuecomment-549454620
+
+  let surveyData;
+
   const store = WebChat.createStore(
     {},
     () => (next) => (action) => {
-      if (action.type === 'DIRECT_LINE/POST_ACTIVITY') {
-        console.warn('postActivity:', action);
+      const ACT = action.payload ? action.payload.activity : null;
 
-        action.payload.activity.channelData = {
-          customEmail: 'j.doe@example.com'
-        };
+      if (action.type === 'DIRECT_LINE/POST_ACTIVITY') {
+        if (surveyData) {
+          ACT.channelData = { surveyData };
+        }
+
         // We are using the simple-update-in package to update "action" with partial deep cloning.
         // action = simpleUpdateIn(action, ['payload', 'activity', 'channelData', 'email'], () => 'j.doe@example.com');
+
+        console.warn('postActivity:', ACT.text, ACT.channelData, action);
+      }
+      else if (action.type === 'DIRECT_LINE/INCOMING_ACTIVITY') {
+        if (ACT.type === 'message' && ACT.text) {
+          const matches = ACT.text.match(QUESTION_REGEX);
+
+          if (matches) {
+            surveyData = {
+              question: matches[1],
+              qIndex: parseInt(matches[2])
+            };
+
+            console.warn('Incoming question:', surveyData, action);
+          }
+        }
       }
 
       return next(action);
@@ -47,6 +67,10 @@ function launchBot () {
       userID: 'nick', // 'YOUR_USER_ID',
       username: 'Nick User',
       locale: 'en-US',
+      styleOptions: {
+         // adaptiveCardsParserMaxVersion: '1.2'
+         hideUploadButton: true,
+      },
       store
     },
     document.getElementById('webchat')

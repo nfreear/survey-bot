@@ -40,7 +40,18 @@ class SurveyBot extends Clonable { // PluginBase {
   parseAnswer (input) {
     const matches = input.utterance.match(this.answerRegex);
 
-    if (matches) {
+    const metaData = input.activity ? input.activity.channelData.surveyData : null;
+
+    if (metaData) {
+      return {
+        answer: input.utterance,
+        qIndex: metaData.qIndex,
+        nextIndex: metaData.qIndex + 1,
+        question: metaData.question
+      };
+    }
+
+    if (matches) { // Legacy!
       return {
         answer: matches[1],
         index: parseInt(matches[2]) - 1, // Zero-based!
@@ -72,12 +83,15 @@ class SurveyBot extends Clonable { // PluginBase {
     switch (input.intent) {
       case 'survey.start':
         response = this.getQuestion(0);
+        metaData = `qid=0`;
+        // metaData = { qIndex: 0 };
         break;
 
       case 'survey.end':
         response = this.signoff;
         break;
 
+      case 'survey.answer': // Drop-through!
       case 'None':
         const result = this.parseAnswer(input);
 
@@ -86,6 +100,8 @@ class SurveyBot extends Clonable { // PluginBase {
         if (result) {
           /** @TODO: Save the 'answer' text ?! */
           response = this.getQuestion(result.nextIndex);
+          metaData = `qid=${result.nextIndex}`;
+          // metaData = { qIndex: result.nextIndex };
         }
         break;
 
@@ -94,7 +110,11 @@ class SurveyBot extends Clonable { // PluginBase {
         break;
     }
 
-    input.text = input.answer = response;
+    input.text = input.answer = `${response}\`${metaData}\``;
+
+    if (input.activity) {
+      input.activity.channelData.surveyBot = metaData;
+    }
 
     // this.logToFile(input);
 

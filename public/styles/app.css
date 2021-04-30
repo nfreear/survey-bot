@@ -1,0 +1,64 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #f8f8f8;
+  font: 1.1rem/1.6 sans-serif;
+  margin: 0 auto;
+  max-width: 33rem;
+}
+
+button, input { font-size: inherit; }
+
+button { cursor: pointer; }
+
+#webchat {
+  border-left: 2px solid #aaa;
+  border-right: 2px solid #aaa;
+  height: 100%;
+  width: 100%;
+}
+
+#webchat .webchat__send-box__main {
+  border-color: #aaa
+}
+
+#webchat code {
+  display: none;
+}
+
+.bot-form {
+  position: fixed;
+  background: #f8f8f8;
+  border: 2px solid #aaa;
+  max-height: 10rem;
+  padding: 0 .8rem;
+  width: calc(33rem - 2rem);
+  z-index: 999;
+}
+
+.bot-form input,
+.bot-form button {
+  padding: .3rem 1rem;
+}
+
+.bot-form.hide {
+  font-size: .001rem;
+  max-height: 1px;
+  overflow: hidden;
+  transition: all 1.5s;
+}
+
+.bot-form.hide,
+.bot-form.hide *,
+.bot-form.hide * > * {
+  border-width: .001rem;
+  margin: 0;
+  padding: 0;
+}
+
+.bot-form.hidden {
+  display: none;
+}
