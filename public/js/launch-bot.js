@@ -2,12 +2,16 @@
   NDF, 28-April-2021.
 */
 
+import { BotSpeech } from './bot-speech.js';
+
 const WebChat = window.WebChat;
 // const simpleUpdateIn = window.simpleUpdateIn;
 
 const QUESTION_REGEX = /(.+)` ?qid=(\d+)`/;
 
-export function launchBot () {
+export async function launchBot () {
+  const speech = new BotSpeech();
+
   // https://github.com/microsoft/BotFramework-WebChat/issues/2377#issuecomment-527895197
   // https://github.com/microsoft/BotFramework-WebChat/tree/main/samples/04.api/b.piggyback-on-outgoing-activities#
   // https://github.com/microsoft/BotFramework-WebChat/issues/2555#issuecomment-549454620
@@ -16,7 +20,10 @@ export function launchBot () {
 
   const store = WebChat.createStore(
     {},
-    () => (next) => (action) => {
+    // https://github.com/microsoft/BotFramework-WebChat/blob/master/CHANGELOG.md#change-in-general-middleware-design
+    () => (next) => (...args) => {
+      const action = args[0];
+
       const ACT = action.payload ? action.payload.activity : null;
 
       if (action.type === 'DIRECT_LINE/POST_ACTIVITY') {
@@ -44,7 +51,7 @@ export function launchBot () {
         }
       }
 
-      return next(action);
+      return next(...args);
     }
   /* function () {
     return function (next) {
@@ -71,8 +78,14 @@ export function launchBot () {
          // adaptiveCardsParserMaxVersion: '1.2'
          hideUploadButton: true,
       },
+      // webSpeechPonyfillFactory: await speech.createSpeechPonyfill(), // TypeError: v is not a function
+      selectVoice: speech.getSelectVoice(),
       store
     },
     document.getElementById('webchat')
   );
+
+  console.warn('Webchat.js:', WebChat);
 }
+
+// End.

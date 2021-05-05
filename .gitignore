@@ -2,5 +2,6 @@
 .env
 node_modules
 *BAK*
+.DS_Store
 
 plugin-base.js
