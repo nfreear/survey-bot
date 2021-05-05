@@ -1,5 +1,6 @@
 
 .env
+_env.js
 node_modules
 *BAK*
 .DS_Store

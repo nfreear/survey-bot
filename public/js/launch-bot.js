@@ -21,7 +21,7 @@ export async function launchBot (options = {}) {
   const store = WebChat.createStore(
     {},
     // https://github.com/microsoft/BotFramework-WebChat/blob/master/CHANGELOG.md#change-in-general-middleware-design
-    () => (next) => (...args) => {
+    ({ dispatch }) => next => (...args) => {
       const action = args[0];
 
       const ACT = action.payload ? action.payload.activity : null;

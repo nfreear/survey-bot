@@ -16,6 +16,9 @@ export class BotSpeech {
 
   constructor (options) {
     this.OPT = options;
+    this.hasSpeech = true;
+
+    console.debug('BotSpeech:', this);
   }
 
   async createSpeechPonyfill () {
@@ -77,6 +80,23 @@ export class BotSpeech {
         return voice;
       }
     };
+  }
+
+  /** @FIX - Experiment -- it works - Yay !!
+   * https://github.com/microsoft/BotFramework-WebChat/blob/master/packages/core/src/actions/startSpeakingActivity.js
+   *
+   * if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
+   *   speech.startSpeakingImmediately(dispatch);
+   * }
+   */
+  startSpeakingImmediately (dispatch) {
+    if (this.hasSpeech) {
+      dispatch({
+        type: 'WEB_CHAT/START_SPEAKING'
+        // , payload: {}
+      });
+      console.warn('>> Dispatched: WEB_CHAT/START_SPEAKING');
+    }
   }
 }
 

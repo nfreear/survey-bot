@@ -11,12 +11,14 @@ body {
 }
 
 body {
-  background-color: #fafafa;
+  background-color: #f8f8f8;
   color: #333;
   font: 1.1rem/1.6 sans-serif;
   margin: 0 auto;
   max-width: 33rem;
 }
+
+h1 { font-size: 1.5rem; margin: .3rem 0; }
 
 button,
 input {
@@ -36,6 +38,12 @@ button { cursor: pointer; }
   outline-offset: .05rem;
 }
 
+#webchat .webchat__send-box__button > button.webchat__icon-button:hover {
+  background-color: #ddd;
+  outline: auto 5px -webkit-focus-ring-color;
+  transition: all 2s;
+}
+
 #webchat form > input.webchat__send-box-text-box__input:focus {
   outline-offset: .6rem;
 }
@@ -48,7 +56,7 @@ button { cursor: pointer; }
 }
 
 #webchat .webchat__send-box__main {
-  border-color: #aaa
+  border-color: #aaa;
 }
 
 #webchat code {
