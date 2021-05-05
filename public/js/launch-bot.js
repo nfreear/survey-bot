@@ -9,8 +9,8 @@ const WebChat = window.WebChat;
 
 const QUESTION_REGEX = /(.+)` ?qid=(\d+)`/;
 
-export async function launchBot () {
-  const speech = new BotSpeech();
+export async function launchBot (options = {}) {
+  const speech = new BotSpeech(options);
 
   // https://github.com/microsoft/BotFramework-WebChat/issues/2377#issuecomment-527895197
   // https://github.com/microsoft/BotFramework-WebChat/tree/main/samples/04.api/b.piggyback-on-outgoing-activities#
@@ -78,14 +78,14 @@ export async function launchBot () {
          // adaptiveCardsParserMaxVersion: '1.2'
          hideUploadButton: true,
       },
-      // webSpeechPonyfillFactory: await speech.createSpeechPonyfill(), // TypeError: v is not a function
-      selectVoice: speech.getSelectVoice(),
+      webSpeechPonyfillFactory: await speech.createSpeechPonyfill(),
+      // selectVoice: speech.getSelectVoice(),
       store
     },
     document.getElementById('webchat')
   );
 
-  console.warn('Webchat.js:', WebChat);
+  console.warn('Webchat.js:', WebChat, options);
 }
 
 // End.

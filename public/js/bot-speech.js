@@ -7,7 +7,6 @@ import {
 } from 'https://nfreear.github.io/dictation/src/index.js';
 
 const {
-  // createDirectLineSpeechAdapters,
   // createBrowserWebSpeechPonyfillFactory,
   createCognitiveServicesSpeechServicesPonyfillFactory
 } = window.WebChat;
@@ -15,10 +14,12 @@ const {
 export class BotSpeech {
   // .
 
-  async createSpeechPonyfill () {
-    const options = getDictationRecognizerConfig();
+  constructor (options) {
+    this.OPT = options;
+  }
 
-    options.region = 'uksouth';
+  async createSpeechPonyfill () {
+    const options = this.OPT; // getDictationRecognizerConfig();
 
     if (!options.subscriptionKey || /_/.test(options.subscriptionKey)) {
       document.body.className += 'error config-error';
@@ -33,8 +34,6 @@ export class BotSpeech {
 
     const asrPonyfill = createDictationRecognizerPonyfill(options);
 
-    // const recognizer = new ponyfill.SpeechRecognition();
-
     const speechServicesPonyfillFactory = await createCognitiveServicesSpeechServicesPonyfillFactory(
       {
         // speechRecognitionEndpointId: options.endpointId, // << Custom recognition model.
@@ -43,13 +42,12 @@ export class BotSpeech {
         credentials
       }
     );
+
     const ttsPonyfill = speechServicesPonyfillFactory();
 
     const ponyfill = {
-      SpeechGrammarList: null, // asrPonyfill.SpeechGrammarList,
-      SpeechRecognition: null, // asrPonyfill.SpeechRecognition,
-      /* SpeechGrammarList: ttsPonyfill.SpeechGrammarList,
-      SpeechRecognition: ttsPonyfill.SpeechRecognition, */
+      SpeechGrammarList: asrPonyfill.SpeechGrammarList,
+      SpeechRecognition: asrPonyfill.SpeechRecognition,
 
       speechSynthesis: ttsPonyfill.speechSynthesis,
       SpeechSynthesisUtterance: ttsPonyfill.SpeechSynthesisUtterance
@@ -57,9 +55,9 @@ export class BotSpeech {
 
     console.debug('Hybrid speech ponyfill:', ponyfill, options);
 
-    return ponyfill;
+    // Must return a function, not an object! ("TypeError: v is not a function")
+    return () => ponyfill;
   }
-
 
   getSelectVoice () {
     return (voices, activity = { locale: null }) => {
