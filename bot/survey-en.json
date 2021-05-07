@@ -11,7 +11,13 @@
     "To get started say or type 'Go'"
   ],
 
-  "signoff": "OK. You'd like to end the survey.",
+  "endTexts": [
+    "Thank you! That's the end ;)"
+  ],
+
+  "endEarlyTexts": [
+    "OK. You'd like to end the survey."
+  ],
 
   "questionTemplate": "Question {N} of {M}. {Q}",
 

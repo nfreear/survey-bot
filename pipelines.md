@@ -25,7 +25,7 @@ if (something && something.value && something.value.joke) {
 surveyBot
 ->output.text
 
-## onIntent(survey.end)
+## onIntent(survey.end.early)
 surveyBot
 ->output.text
 

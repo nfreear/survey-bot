@@ -32,13 +32,15 @@ class SurveyBot extends Clonable { // PluginBase {
     this.answerRegex = ANSWER_REGEX;
 
     this.introTexts = SURVEY.introTexts;
+    this.endTexts = SURVEY.endTexts;
+    this.endEarlyTexts = SURVEY.endEarlyTexts;
     this.questionTemplate = SURVEY.questionTemplate;
     this.questions = SURVEY.questions;
-    this.signoff = SURVEY.signoff;
+    // WAS: this.signoff = SURVEY.signoff;
   }
 
   parseAnswer (input) {
-    const matches = input.utterance.match(this.answerRegex);
+    const matches = input.utterance.match(this.answerRegex); // To delete!
 
     const metaData = input.activity ? input.activity.channelData.surveyData : null;
 
@@ -65,6 +67,10 @@ class SurveyBot extends Clonable { // PluginBase {
     const SIZE = this.questions.length;
     const TEXT = this.questions[index] || null;
 
+    if (!TEXT) {
+      return false;
+    }
+
     return this.questionTemplate
       .replace('{N}', index + 1)
       .replace('{M}', SIZE)
@@ -78,17 +84,17 @@ class SurveyBot extends Clonable { // PluginBase {
     console.log(input);
 
     let response = 'Woops!';
-    let metaData = null;
+    let metaData = { intent: input.intent, theEnd: false };
 
     switch (input.intent) {
       case 'survey.start':
         response = this.getQuestion(0);
-        metaData = `qid=0`;
-        // metaData = { qIndex: 0 };
+        // metaData = `qid=0`;
+        metaData.qIndex = 0;  // = { qIndex: 0 };
         break;
 
-      case 'survey.end':
-        response = this.signoff;
+      case 'survey.end.early': // WAS: 'survey.end':
+        response = this.endEarlyTexts.join(' '); // WAS: this.signoff;
         break;
 
       case 'survey.answer': // Drop-through!
@@ -100,8 +106,14 @@ class SurveyBot extends Clonable { // PluginBase {
         if (result) {
           /** @TODO: Save the 'answer' text ?! */
           response = this.getQuestion(result.nextIndex);
-          metaData = `qid=${result.nextIndex}`;
-          // metaData = { qIndex: result.nextIndex };
+          // metaData = `qid=${result.nextIndex}`;
+          metaData.qIndex = result.nextIndex;
+
+          if (!response) {
+            response = this.endTexts.join(' ');
+            metaData.qIndex = null;
+            metaData.theEnd = true;
+          }
         }
         break;
 
@@ -110,10 +122,21 @@ class SurveyBot extends Clonable { // PluginBase {
         break;
     }
 
-    input.text = input.answer = `${response}\`${metaData}\``;
+    input.text = input.answer = response; // WAS: `${response}\`${metaData}\``;
+
+    input.inputHint = 'expectingInput'; // Doesn't work :(.
+
+    /* if (input.activity) {
+      input.activity.channelData.surveyBot = metaData;
+    } */
 
     if (input.activity) {
-      input.activity.channelData.surveyBot = metaData;
+      const CONV = { conversationId: input.activity.conversation.id };
+
+      metaData.question = response;
+
+      // Slightly arbitrary 10ms delay!
+      setTimeout(() => this.sendEvent(CONV, 'surveyBot:run', metaData), 10);
     }
 
     // this.logToFile(input);
@@ -134,7 +157,7 @@ class SurveyBot extends Clonable { // PluginBase {
         this.sendTyping(conv);
       });
 
-      this.sendEvent(conv);
+      this.sendEvent(conv, 'surveyBot:introSent');
     };
   }
 

@@ -31,7 +31,7 @@
     },
 
     {
-      "intent": "survey.end",
+      "intent": "survey.end.early",
       "utterances": [
         "End the survey",
         "Stop asking",
@@ -58,7 +58,7 @@
         "I'm forty",
         "I'm forty-five",
         "35",
-        "If you can keep your head when all about you Are losing theirs"
+        "If you can keep your head when all about you Are losing theirs and blaming"
       ]
     }
   ]
