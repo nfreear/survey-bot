@@ -7,16 +7,18 @@ import { BotSpeech } from './bot-speech.js';
 const WebChat = window.WebChat;
 // const simpleUpdateIn = window.simpleUpdateIn;
 
-const QUESTION_REGEX = /(.+)` ?qid=(\d+)`/;
+// WAS: const QUESTION_REGEX = /(.+)` ?qid=(\d+)`/;
 
-export async function launchBot (options = {}) {
-  const speech = new BotSpeech(options);
+export async function launchBot (options = { speech: {} }) {
+  const speech = new BotSpeech(options.speech);
 
   // https://github.com/microsoft/BotFramework-WebChat/issues/2377#issuecomment-527895197
   // https://github.com/microsoft/BotFramework-WebChat/tree/main/samples/04.api/b.piggyback-on-outgoing-activities#
   // https://github.com/microsoft/BotFramework-WebChat/issues/2555#issuecomment-549454620
 
-  let surveyData;
+  let surveyData = { theEnd: false };
+
+  let isFirstIncoming = true;
 
   const store = WebChat.createStore(
     {},
@@ -37,8 +39,18 @@ export async function launchBot (options = {}) {
         console.warn('postActivity:', ACT.text, ACT.channelData, action);
       }
       else if (action.type === 'DIRECT_LINE/INCOMING_ACTIVITY') {
+        if (ACT.type === 'event') {
+          if (ACT.name === 'surveyBot:run') {
+            surveyData = ACT.value;
+
+            console.warn('> Incoming question:', surveyData, action);
+          } else {
+            console.warn('> Incoming event:', ACT.name, ACT);
+          }
+        }
+
         if (ACT.type === 'message' && ACT.text) {
-          const matches = ACT.text.match(QUESTION_REGEX);
+          /* WAS: const matches = ACT.text.match(QUESTION_REGEX);
 
           if (matches) {
             surveyData = {
@@ -47,8 +59,23 @@ export async function launchBot (options = {}) {
             };
 
             console.warn('Incoming question:', surveyData, action);
-          }
+          } */
         }
+
+      } else if (action.type === 'WEB_CHAT/STOP_SPEAKING') {
+        // Instead of the 'expectingInput' inputHint, dispatch '..START_DICDATE'!
+        setTimeout(() => {
+          if (surveyData.theEnd) {
+              console.warn('>> THE END!', action);
+          } else {
+              dispatch({ type: 'WEB_CHAT/START_DICTATE' });
+
+              console.warn('>> dispatch:', 'WEB_CHAT/START_DICTATE', action);
+          }
+        },
+        1800); // Was: 500, 1500;
+      } else {
+        console.debug(action.type, action);
       }
 
       return next(...args);

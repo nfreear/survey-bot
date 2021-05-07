@@ -2,38 +2,43 @@
   NDF, 30-April-2021.
 */
 
-import { ENV } from './_env.js';
+// import { ENV } from './_env.js';
 import { launchBot } from './launch-bot.js';
 
 const MIN_ALLOW_TIMEOUT = 100;
-const DEF_TIMEOUT = 3.0;
+// const DEF_TIMEOUT = 3.0;
 const BOT_FORM = document.querySelector('#bot-form');
 
-BOT_FORM.addEventListener('submit', ev => {
-  ev.preventDefault();
+const fetch = window.fetch;
 
-  const timeoutValue = parseFloat(ev.target[0].value);
+(async () => {
+  const OPT = await getConfigJson();
 
-  const endSilenceTimeoutMs = timeoutValue === 0 ? MIN_ALLOW_TIMEOUT : timeoutValue * 1000;
+  BOT_FORM.addEventListener('submit', ev => {
+    ev.preventDefault();
 
-  console.warn('Launch Bot! Timeout, ms:', endSilenceTimeoutMs, ev);
+    const timeoutValue = parseFloat(ev.target[0].value);
 
-  ev.target.classList.add('hide');
-  setTimeout(() => ev.target.classList.add('hidden'), 2000);
+    const endSilenceTimeoutMs = timeoutValue === 0 ? MIN_ALLOW_TIMEOUT : timeoutValue * 1000;
 
-  launchBot({
-    subscriptionKey: ENV.subscriptionKey, // param(/key=(\w{30,})/),
-    region: ENV.region,
-    endSilenceTimeoutMs,
+    console.warn('Launch Bot! Timeout, ms:', endSilenceTimeoutMs, ev);
+
+    ev.target.classList.add('hide');
+    setTimeout(() => ev.target.classList.add('hidden'), 2000);
+
+    OPT.speech.endSilenceTimeoutMs = endSilenceTimeoutMs;
+
+    launchBot(OPT);
   });
-});
 
-initialize();
+  initialize(OPT);
+})();
 
-function initialize () {
-  console.debug('Env:', ENV);
 
-  BOT_FORM[0].value = parseFloat(param(/timeout=(\d+(\.[05])?)/, DEF_TIMEOUT));
+function initialize (OPT) {
+  console.debug('Configuration:', OPT);
+
+  BOT_FORM[0].value = parseFloat(param(/timeout=(\d+(\.[05])?)/, OPT.speech.defaultTimeout));
 
   const SHOW_FORM = !param(/showForm=(false)/i);
 
@@ -43,6 +48,11 @@ function initialize () {
     const submitEvent = new Event('submit');
     BOT_FORM.dispatchEvent(submitEvent);
   }
+}
+
+async function getConfigJson() {
+  const response = await fetch('/api/config.json');
+  return response.json();
 }
 
 function param(regex, def = null) {
