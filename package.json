@@ -1,7 +1,8 @@
 {
   "private": true,
   "name": "@nfreear/survey-bot",
-  "description": "Get a user to answer questions and talk about themselves!",
+  "description": "A speech-enabled Chat-bot. Get the user to answer questions and talk about themselves!",
+  "author": "© Nick Freear",
   "license": "proprietary",
   "repository": "https://github.com/nfreear/survey-bot.git",
   "engines": {
@@ -12,6 +13,10 @@
     "@nlpjs/directline-connector": "^4.22.0",
     "@nlpjs/express-api-server": "^4.22.0",
     "@nlpjs/msbf-connector": "^4.22.0"
+  },
+  "x-CDN": {
+    "@MS/Webchat": "https://cdn.botframework.com/botframework-webchat/4.13.0/webchat.js",
+    "@MS/Cog-speech-sdk": "https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@1.16.0/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle-min.js"
   },
   "scripts": {
     "start": "node index.js"

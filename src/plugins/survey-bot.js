@@ -29,8 +29,6 @@ class SurveyBot extends Clonable { // PluginBase {
 
     this.name = 'surveyBot';
 
-    this.answerRegex = ANSWER_REGEX;
-
     this.introTexts = SURVEY.introTexts;
     this.endTexts = SURVEY.endTexts;
     this.endEarlyTexts = SURVEY.endEarlyTexts;
@@ -40,8 +38,6 @@ class SurveyBot extends Clonable { // PluginBase {
   }
 
   parseAnswer (input) {
-    const matches = input.utterance.match(this.answerRegex); // To delete!
-
     const metaData = input.activity ? input.activity.channelData.surveyData : null;
 
     if (metaData) {
@@ -53,13 +49,6 @@ class SurveyBot extends Clonable { // PluginBase {
       };
     }
 
-    if (matches) { // Legacy!
-      return {
-        answer: matches[1],
-        index: parseInt(matches[2]) - 1, // Zero-based!
-        nextIndex: parseInt(matches[2]) - 1 + 1, // Yes, really!
-      };
-    }
     return null;
   }
 
@@ -79,7 +68,7 @@ class SurveyBot extends Clonable { // PluginBase {
   }
 
   run (input) {
-    this.logger.info(this.name, '.run()');
+    this.logger.info(`${this.name}.run()`);
 
     console.log(input);
 
@@ -90,11 +79,11 @@ class SurveyBot extends Clonable { // PluginBase {
       case 'survey.start':
         response = this.getQuestion(0);
         // metaData = `qid=0`;
-        metaData.qIndex = 0;  // = { qIndex: 0 };
+        metaData.qIndex = 0;
         break;
 
       case 'survey.end.early': // WAS: 'survey.end':
-        response = this.endEarlyTexts.join(' '); // WAS: this.signoff;
+        response = this.endEarlyTexts.join(' ');
         break;
 
       case 'survey.answer': // Drop-through!
@@ -122,13 +111,9 @@ class SurveyBot extends Clonable { // PluginBase {
         break;
     }
 
-    input.text = input.answer = response; // WAS: `${response}\`${metaData}\``;
+    input.text = input.answer = response;
 
     input.inputHint = 'expectingInput'; // Doesn't work :(.
-
-    /* if (input.activity) {
-      input.activity.channelData.surveyBot = metaData;
-    } */
 
     if (input.activity) {
       const CONV = { conversationId: input.activity.conversation.id };

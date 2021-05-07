@@ -7,8 +7,6 @@ import { BotSpeech } from './bot-speech.js';
 const WebChat = window.WebChat;
 // const simpleUpdateIn = window.simpleUpdateIn;
 
-// WAS: const QUESTION_REGEX = /(.+)` ?qid=(\d+)`/;
-
 export async function launchBot (options = { speech: {} }) {
   const speech = new BotSpeech(options.speech);
 
@@ -49,19 +47,8 @@ export async function launchBot (options = { speech: {} }) {
           }
         }
 
-        if (ACT.type === 'message' && ACT.text) {
-          /* WAS: const matches = ACT.text.match(QUESTION_REGEX);
-
-          if (matches) {
-            surveyData = {
-              question: matches[1],
-              qIndex: parseInt(matches[2])
-            };
-
-            console.warn('Incoming question:', surveyData, action);
-          } */
-        }
-
+        /* if (ACT.type === 'message' && ACT.text) {
+        } */
       } else if (action.type === 'WEB_CHAT/STOP_SPEAKING') {
         // Instead of the 'expectingInput' inputHint, dispatch '..START_DICDATE'!
         setTimeout(() => {
