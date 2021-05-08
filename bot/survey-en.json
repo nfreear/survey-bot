@@ -1,5 +1,8 @@
 {
   "#": [
+    "Get the user to answer some questions and talk about themselves!",
+
+    "Markdown IS SUPPORTED!",
 
     "https://www.poetryfoundation.org/poems/46473/if---"
   ],
@@ -8,15 +11,15 @@
 
   "introTexts": [
     "Welcome to the Survey Bot!",
-    "To get started say or type 'Go'"
+    "To get started, press the microphone button then say or type 'Go'"
   ],
 
   "endTexts": [
-    "Thank you! That's the end ;)"
+    "Thank you for your help! That's the end ;)"
   ],
 
   "endEarlyTexts": [
-    "OK. You'd like to end the survey."
+    "OK. You'd like to end the survey. Good bye-ee!"
   ],
 
   "questionTemplate": "Question {N} of {M}. {Q}",

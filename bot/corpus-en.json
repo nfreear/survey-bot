@@ -20,12 +20,38 @@
     },
 
     {
+      "intent": "do.you.stammer",
+      "utterances": [
+        "Do you stammer?",
+        "Do you have a stutter?",
+        "Do you have a stunner?"
+      ],
+      "answers": [
+        "No, I don't. I'm working to raise awareness of the impact of speech-devices on people who stammer/stutter and have non-typical speech."
+      ]
+    },
+
+    {
+      "intent": "i.need.help.stammer",
+      "utterances": [
+        "I need help with my stammer",
+        "I stutter. Can you help?",
+        "Where can I get help with my stutter?",
+        "Help! My son stammers"
+      ],
+      "answers": [
+        "Sure. I know people! You can get support from [Stamma](https://stamma.org/get-support), a UK-based charity. Good luck!"
+      ]
+    },
+
+    {
       "intent": "survey.start",
       "utterances": [
         "Start the survey",
         "Begin the survey",
         "Question me",
         "I'm ready",
+        "Let's go",
         "Go"
       ]
     },
@@ -55,9 +81,9 @@
         "i'm nick",
         "I'm called Nick",
         "My name is Tom",
-        "I'm forty",
-        "I'm forty-five",
-        "35",
+        "I'm forty years old",
+        "I'm thirty-five",
+        "I'm 35",
         "If you can keep your head when all about you Are losing theirs and blaming"
       ]
     }
