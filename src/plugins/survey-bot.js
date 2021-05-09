@@ -1,7 +1,7 @@
 /**
  * A "survey bot" plugin ?!
  *
- * @author  NDF, 28-April-2021.
+ * @copyright © Nick Freear, 28-April-2021.
  * @author  NDF, 25-Feb-2020.
  *
  * @see Activity schema :~

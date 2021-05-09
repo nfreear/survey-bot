@@ -1,6 +1,7 @@
-/*!
-  NDF, 04-May-2021.
-*/
+/**
+ *
+ * @copyright © Nick Freear, 04-May-2021.
+ */
 
 import {
   createDictationRecognizerPonyfill, getDictationRecognizerConfig
@@ -22,7 +23,9 @@ export class BotSpeech {
   }
 
   async createSpeechPonyfill () {
-    const options = this.OPT; // getDictationRecognizerConfig();
+    const options = this.OPT;
+    const useAdaptive = this.OPT.useAdaptive;
+    // Was: const useDictation = this.OPT.useDictation;
 
     if (!options.subscriptionKey || /_/.test(options.subscriptionKey)) {
       document.body.className += 'error config-error';
@@ -35,8 +38,6 @@ export class BotSpeech {
       subscriptionKey: options.subscriptionKey
     };
 
-    const asrPonyfill = createDictationRecognizerPonyfill(options);
-
     const speechServicesPonyfillFactory = await createCognitiveServicesSpeechServicesPonyfillFactory(
       {
         // speechRecognitionEndpointId: options.endpointId, // << Custom recognition model.
@@ -48,6 +49,8 @@ export class BotSpeech {
 
     const ttsPonyfill = speechServicesPonyfillFactory();
 
+    const asrPonyfill = useAdaptive ? createDictationRecognizerPonyfill(options) : ttsPonyfill;
+
     const ponyfill = {
       SpeechGrammarList: asrPonyfill.SpeechGrammarList,
       SpeechRecognition: asrPonyfill.SpeechRecognition,
@@ -58,7 +61,7 @@ export class BotSpeech {
 
     console.debug('Hybrid speech ponyfill:', ponyfill, options);
 
-    // Must return a function, not an object! ("TypeError: v is not a function")
+    // Must return a function, not an object! (Else we get "TypeError: v is not a function")
     return () => ponyfill;
   }
 

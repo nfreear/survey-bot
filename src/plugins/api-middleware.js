@@ -1,6 +1,7 @@
 /**
- * Serve ".env" configuration variables via JSON.
+ * Plugin to serve ".env" configuration variables via JSON.
  *
+ * @copyright © Nick Freear 2021.
  * @author Nick Freear, 22-Jul-2020.
  */
 
@@ -34,7 +35,7 @@ class ServeApiMiddleware extends Clonable {
 
   start () {
     const {
-      speechSubscriptionKey, speechRegion, speechDefaultTimeout,
+      speechSubscriptionKey, speechRegion, speechDefaultTimeout, speechUseAdaptive
     } = process.env;
 
     const server = this.container.get('api-server').app;
@@ -58,6 +59,7 @@ class ServeApiMiddleware extends Clonable {
               region: speechRegion,
               subscriptionKey: speechSubscriptionKey,
               defaultTimeout: parseFloat(speechDefaultTimeout),
+              useAdaptive: speechUseAdaptive,
             }
           };
           // res.header('Content-Type', 'text/plain; charset=utf-8');

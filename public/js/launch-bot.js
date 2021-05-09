@@ -1,6 +1,7 @@
-/*!
-  NDF, 28-April-2021.
-*/
+/**
+ *
+ * @copyright © Nick Freear, 28-April-2021.
+ */
 
 import { BotSpeech } from './bot-speech.js';
 

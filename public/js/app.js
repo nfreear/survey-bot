@@ -1,6 +1,8 @@
-/*!
-  NDF, 30-April-2021.
-*/
+/**
+ * Survey-Bot client App.
+ *
+ * @copyright © Nick Freear, 30-April-2021.
+ */
 
 // import { ENV } from './_env.js';
 import { launchBot } from './launch-bot.js';
