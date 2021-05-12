@@ -35,7 +35,7 @@ class ServeApiMiddleware extends Clonable {
 
   start () {
     const {
-      speechSubscriptionKey, speechRegion, speechDefaultTimeout, speechUseAdaptive
+      speechSubscriptionKey, speechRegion, speechDefaultTimeout, speechUseAdaptive, analyticsId
     } = process.env;
 
     const server = this.container.get('api-server').app;
@@ -55,11 +55,12 @@ class ServeApiMiddleware extends Clonable {
         try {
           const CONFIG = {
             _: this.name,
+            analyticsId,
             speech: {
               region: speechRegion,
               subscriptionKey: speechSubscriptionKey,
               defaultTimeout: parseFloat(speechDefaultTimeout),
-              useAdaptive: speechUseAdaptive,
+              useAdaptive: speechUseAdaptive === 'true',
             }
           };
           // res.header('Content-Type', 'text/plain; charset=utf-8');

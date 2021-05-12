@@ -1,5 +1,5 @@
 /**
- * A "survey bot" plugin ?!
+ * A "survey bot" plugin.
  *
  * @copyright © Nick Freear, 28-April-2021.
  * @author  NDF, 25-Feb-2020.
@@ -8,13 +8,15 @@
  * https://github.com/microsoft/botframework-sdk/blob/master/specs/botframework-activity/botframework-activity.md
  */
 
+// For now, hard-code the survey JSON file.
 const SURVEY = require('../../bot/survey-en.json');
 
 const { defaultContainer, Clonable } = require('@nlpjs/core');
 
 // const { PluginBase, defaultContainer } = require('../plugin-base');
 
-const ANSWER_REGEX = /([\w'\- ]+) *[`]?\[qa=(\d+)\][`]?/;
+const EVENT_RUN = 'surveyBot:run';
+const EVENT_INTRO_SENT = 'surveyBot:introSent';
 
 class SurveyBot extends Clonable { // PluginBase {
   constructor (settings = {}, container) {
@@ -121,7 +123,7 @@ class SurveyBot extends Clonable { // PluginBase {
       metaData.question = response;
 
       // Slightly arbitrary 10ms delay!
-      setTimeout(() => this.sendEvent(CONV, 'surveyBot:run', metaData), 10);
+      setTimeout(() => this.sendEvent(CONV, EVENT_RUN, metaData), 10);
     }
 
     // this.logToFile(input);
@@ -142,8 +144,12 @@ class SurveyBot extends Clonable { // PluginBase {
         this.sendTyping(conv);
       });
 
-      this.sendEvent(conv, 'surveyBot:introSent');
+      this.sendEvent(conv, EVENT_INTRO_SENT);
     };
+
+    /* ?? directlineCon.onHear = async (ctr, conv) => {
+      console.log('onHear:', conv);
+    }; */
   }
 
   say (conv, text) {

@@ -8,6 +8,9 @@ import { BotSpeech } from './bot-speech.js';
 const WebChat = window.WebChat;
 // const simpleUpdateIn = window.simpleUpdateIn;
 
+const EVENT_RUN = 'surveyBot:run';
+const EVENT_INTRO_SENT = 'surveyBot:introSent';
+
 export async function launchBot (options = { speech: {} }) {
   const speech = new BotSpeech(options.speech);
 
@@ -39,10 +42,14 @@ export async function launchBot (options = { speech: {} }) {
       }
       else if (action.type === 'DIRECT_LINE/INCOMING_ACTIVITY') {
         if (ACT.type === 'event') {
-          if (ACT.name === 'surveyBot:run') {
+          if (ACT.name === EVENT_RUN) {
             surveyData = ACT.value;
 
             console.warn('> Incoming question:', surveyData, action);
+          } else if (ACT.name === EVENT_INTRO_SENT) {
+            // dispatch({ type: 'WEB_CHAT/SEND_EVENT', payload: { name: 'TEST', value: [ 1 ] }});
+
+            console.warn('> Incoming - dispatching TEST event?', ACT.name, ACT);
           } else {
             console.warn('> Incoming event:', ACT.name, ACT);
           }
@@ -63,7 +70,7 @@ export async function launchBot (options = { speech: {} }) {
         },
         1800); // Was: 500, 1500;
       } else {
-        console.debug(action.type, action);
+        // console.debug(action.type, action);
       }
 
       return next(...args);
@@ -89,6 +96,7 @@ export async function launchBot (options = { speech: {} }) {
       userID: 'nick', // 'YOUR_USER_ID',
       username: 'Nick User',
       locale: 'en-US',
+      role: 'region', // Not 'complementary'!
       styleOptions: {
          // adaptiveCardsParserMaxVersion: '1.2'
          hideUploadButton: true,
