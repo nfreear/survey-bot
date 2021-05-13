@@ -69,6 +69,10 @@ form p { margin: .5rem 0 1rem; }
   display: none;
 }
 
+#webchat .markdown em {
+  font-size: .9rem;
+}
+
 .bot-form {
   position: fixed;
   background: #f8f8f8;

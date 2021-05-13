@@ -1,5 +1,9 @@
 {
+  "name": "Survey 1",
+
   "#": [
+    "For people who stammer / stutter.",
+
     "Get the user to answer some questions and talk about themselves!",
 
     "Markdown IS SUPPORTED!",
@@ -17,14 +21,17 @@
   ],
 
   "endTexts": [
-    "Thank you for your help! That's the end ;)"
+    "Thank you for your help!",
+    "That's the end ;)"
   ],
 
   "endEarlyTexts": [
-    "OK. You'd like to end the survey. Good bye-ee!"
+    "OK.",
+    "You'd like to end the survey.",
+    "Good bye-ee!"
   ],
 
-  "questionTemplate": "Question {N} of {M}. {Q}",
+  "questionTemplate": "_Question {N} of {M}._ {Q}",
 
   "questions": [
     "What is your full name please?",

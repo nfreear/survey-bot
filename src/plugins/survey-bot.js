@@ -163,7 +163,7 @@ class SurveyBot extends Clonable { // PluginBase {
     this.directlineCon.say({
       // type: 'message',
       // text: 'Greetings! [createConv]',
-      locale: 'en-US',
+      locale: this.get('locale') || 'en-US',
       conversation: { id: conv.conversationId }
     },
     text);

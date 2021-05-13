@@ -93,9 +93,9 @@ export async function launchBot (options = { speech: {} }) {
         webSocket: false,
         // token: 'YOUR_DIRECT_LINE_TOKEN'
       }),
-      userID: 'nick', // 'YOUR_USER_ID',
-      username: 'Nick User',
-      locale: 'en-US',
+      userID: options.userID || 'nick', // 'YOUR_USER_ID',
+      username: options.username || 'Nick User',
+      locale: options.locale || 'en-US',
       role: 'region', // Not 'complementary'!
       styleOptions: {
          // adaptiveCardsParserMaxVersion: '1.2'

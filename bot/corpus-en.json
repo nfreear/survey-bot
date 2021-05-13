@@ -1,6 +1,7 @@
 {
-  "name": "Survey-bot corpus",
-  "locale": "en-US",
+  "name": "Survey-bot corpus (Survey 1)",
+
+  "locale": "en-GB",
 
   "data": [
     {
@@ -37,7 +38,8 @@
         "I need help with my stammer",
         "I stutter. Can you help?",
         "Where can I get help with my stutter?",
-        "Help! My son stammers"
+        "Help! My son stammers",
+        "My daughter stutters"
       ],
       "answers": [
         "Sure. I know people! You can get support from [Stamma](https://stamma.org/get-support), a UK-based charity. Good luck!"
@@ -49,6 +51,7 @@
       "utterances": [
         "Start the survey",
         "Begin the survey",
+        "start the quiz",
         "Question me",
         "I'm ready",
         "Let's go",
@@ -81,10 +84,15 @@
         "i'm nick",
         "I'm called Nick",
         "My name is Tom",
+        "My name is Susan",
         "I'm forty years old",
         "I'm thirty-five",
         "I'm 35",
-        "If you can keep your head when all about you Are losing theirs and blaming"
+        "I live at 221 B Baker Street London",
+        "My address is 13 Cranfield Road Woburn Sands",
+        "I'm at 10 Walton Drive Milton Keynes",
+        "If you can keep your head when all about you Are losing theirs and blaming",
+        "Go ahead when all about. You are blaming the blame it on you"
       ]
     }
   ]
