@@ -27,16 +27,23 @@ class SurveyBot extends Clonable { // PluginBase {
     container
     );
 
-    this.initialize();
-
     this.name = 'surveyBot';
 
-    this.introTexts = SURVEY.introTexts;
-    this.endTexts = SURVEY.endTexts;
-    this.endEarlyTexts = SURVEY.endEarlyTexts;
-    this.questionTemplate = SURVEY.questionTemplate;
-    this.questions = SURVEY.questions;
+    this.initialize();
+
+    this.loadSurvey();
+  }
+
+  loadSurvey () {
+    const { introTexts, endTexts, endEarlyTexts, questionTemplate, questions } = SURVEY;
+
+    this.survey = { introTexts, endTexts, endEarlyTexts, questionTemplate, questions };
+
     // WAS: this.signoff = SURVEY.signoff;
+  }
+
+  get (key) {
+    return this.survey[key];
   }
 
   parseAnswer (input) {
@@ -55,14 +62,14 @@ class SurveyBot extends Clonable { // PluginBase {
   }
 
   getQuestion (index = 0) {
-    const SIZE = this.questions.length;
-    const TEXT = this.questions[index] || null;
+    const SIZE = this.get('questions').length;
+    const TEXT = this.get('questions')[index] || null;
 
     if (!TEXT) {
       return false;
     }
 
-    return this.questionTemplate
+    return this.get('questionTemplate')
       .replace('{N}', index + 1)
       .replace('{M}', SIZE)
       .replace('{Q}', TEXT)
@@ -85,7 +92,7 @@ class SurveyBot extends Clonable { // PluginBase {
         break;
 
       case 'survey.end.early': // WAS: 'survey.end':
-        response = this.endEarlyTexts.join(' ');
+        response = this.get('endEarlyTexts').join(' ');
         break;
 
       case 'survey.answer': // Drop-through!
@@ -101,7 +108,7 @@ class SurveyBot extends Clonable { // PluginBase {
           metaData.qIndex = result.nextIndex;
 
           if (!response) {
-            response = this.endTexts.join(' ');
+            response = this.get('endTexts').join(' ');
             metaData.qIndex = null;
             metaData.theEnd = true;
           }
@@ -139,7 +146,7 @@ class SurveyBot extends Clonable { // PluginBase {
     directlineCon.onCreateConversation = (ctr, conv) => {
       console.log('onCreateConversation:', conv);
 
-      this.introTexts.forEach(text => {
+      this.get('introTexts').forEach(text => {
         this.say(conv, text);
         this.sendTyping(conv);
       });
