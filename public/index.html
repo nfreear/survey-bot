@@ -4,7 +4,7 @@
 <meta name="copyright" content="© Nick Freear" />
 
 <link rel="stylesheet" href="styles/app.css" />
-<link rel="XX-icon" href="data:," /><!-- Prevent 404 errors. -->
+<link rel="icon" href="data:," /><!-- Prevent 404 errors. -->
 
 <script
   crossorigin="anonymous"
@@ -24,13 +24,24 @@
 
 <form id="bot-form" class="bot-form">
   <h1> Survey bot </h1>
-  <p>
-    <label for="timeout">Speech timeout in seconds</label>
 
+  <p class="inp-timeout">
+    <label for="timeout">Speech timeout in seconds</label>
     <input id="timeout" type="number" value="" min="0" max="30" step="0.5" pattern="\d+(\.\d+)?" />
 
-    <button type="submit">Launch the Bot</button>
-  </p>
+  <p class="inp-asr">
+    <label for="asr">Speech recognizer mode</label>
+    <select id="asr" data-regex="^(adaptive|default)$">
+      <option>adaptive</option> <option>default</option>
+    </select>
+
+  <p class="inp-locale">
+    <label for="locale">Language</label>
+    <select id="locale" data-regex="^(en-GB|fr-FR)$">
+      <option value="en-GB">English</option> <option value="fr-FR">Français</option>
+    </select>
+
+  <p><button type="submit">Launch the Bot</button>
 </form>
 
 

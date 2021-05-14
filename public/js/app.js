@@ -19,11 +19,13 @@ const fetch = window.fetch;
   BOT_FORM.addEventListener('submit', ev => {
     ev.preventDefault();
 
-    const timeoutValue = parseFloat(ev.target[0].value);
+    const data = getFormDataFromEvent(ev);
 
-    const endSilenceTimeoutMs = timeoutValue === 0 ? MIN_ALLOW_TIMEOUT : timeoutValue * 1000;
+    // console.warn('> Submit:', data, ev); return;
 
-    console.warn('Launch Bot! Timeout, ms:', endSilenceTimeoutMs, ev);
+    const endSilenceTimeoutMs = data.timeout === 0 ? MIN_ALLOW_TIMEOUT : data.timeout * 1000;
+
+    console.warn('Launch Bot! Timeout, ms:', endSilenceTimeoutMs, data, ev);
 
     ev.target.classList.add('hide');
     setTimeout(() => ev.target.classList.add('hidden'), 2000);
@@ -50,6 +52,17 @@ function initialize (OPT) {
     const submitEvent = new Event('submit');
     BOT_FORM.dispatchEvent(submitEvent);
   }
+}
+
+function getFormDataFromEvent(ev) {
+  const inputFields = [...ev.target.elements].filter(el => el.nodeName !== 'BUTTON');
+  let data = {};
+  inputFields.forEach(el => {
+    const isNum = el.type === 'number';
+    const re = el.dataset.regex ? new RegExp(el.dataset.regex) : null;
+    data[el.id] = isNum ? parseFloat(el.value) : re && re.test(el.value) ? el.value : null;
+  });
+  return data;
 }
 
 async function getConfigJson() {

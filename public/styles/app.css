@@ -24,16 +24,19 @@ body {
 h1 { font-size: 1.4rem; margin: .3rem 0; }
 
 button,
+select,
 input {
   color: inherit;
   font-family: inherit;
   font-size: inherit;
-  margin: .3rem 0 0;
+  X-margin: .3rem 0 0;
 }
+
+:invalid { border-color: red; }
 
 button { cursor: pointer; }
 
-form p { margin: .5rem 0 1rem; }
+.bot-form p { margin: .2rem 0; }
 
 /* Accessibility :~ fix focus-ring! */
 #webchat form > input.webchat__send-box-text-box__input:focus,
@@ -79,6 +82,7 @@ form p { margin: .5rem 0 1rem; }
   border: 2px solid #aaa;
   border-top: none;
   display: block;
+  font-size: 1.05rem;
   max-height: 20rem;
   padding: 0 .8rem;
   width: 33rem;
@@ -94,9 +98,18 @@ form p { margin: .5rem 0 1rem; }
   }
 }
 
+.bot-form label { display: inline-block; width: 13rem; }
+
 .bot-form input,
+.bot-form select,
 .bot-form button {
-  padding: .3rem 1rem;
+  padding: .25rem .5rem;
+}
+
+.bot-form button {
+  display: block;
+  margin: .5rem auto;
+  padding: .3rem 2rem;
 }
 
 .bot-form.hide {
