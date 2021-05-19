@@ -32,6 +32,8 @@ const fetch = window.fetch;
 
     OPT.speech.endSilenceTimeoutMs = endSilenceTimeoutMs;
 
+    OPT.speech.useAdaptive = data.asr === 'adaptive';
+
     launchBot(OPT);
   });
 
@@ -42,7 +44,9 @@ const fetch = window.fetch;
 function initialize (OPT) {
   console.debug('Configuration:', OPT);
 
-  BOT_FORM[0].value = parseFloat(param(/timeout=(\d+(\.[05])?)/, OPT.speech.defaultTimeout));
+  const data = setFormFromUrlParams(BOT_FORM);
+
+  // BOT_FORM[0].value = parseFloat(param(/timeout=(\d+(\.[05])?)/, OPT.speech.defaultTimeout));
 
   const SHOW_FORM = !param(/showForm=(false)/i);
 
@@ -54,12 +58,25 @@ function initialize (OPT) {
   }
 }
 
+function setFormFromUrlParams(form) {
+  const inputFields = [...form.elements].filter(el => el.nodeName !== 'BUTTON');
+  let data = {};
+  inputFields.forEach(el => {
+    const re = new RegExp(`${el.id}=${el.dataset.regex ? el.dataset.regex : '([^&]+)'}`);
+
+    el.value = param(re, el.value);
+    document.body.classList.add(`fl-${el.id}-${el.value}`);
+    data[el.id] = el.value;
+  });
+  return data;
+}
+
 function getFormDataFromEvent(ev) {
   const inputFields = [...ev.target.elements].filter(el => el.nodeName !== 'BUTTON');
   let data = {};
   inputFields.forEach(el => {
     const isNum = el.type === 'number';
-    const re = el.dataset.regex ? new RegExp(el.dataset.regex) : null;
+    const re = el.dataset.regex ? new RegExp(`^${el.dataset.regex}$`) : null;
     data[el.id] = isNum ? parseFloat(el.value) : re && re.test(el.value) ? el.value : null;
   });
   return data;

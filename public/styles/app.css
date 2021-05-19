@@ -127,7 +127,15 @@ button { cursor: pointer; }
   padding: 0;
 }
 
-.load-hide-form .bot-form,
+.bot-form p,
+.XX-load-hide-form .bot-form,
 .bot-form.hidden {
   display: none;
+}
+
+.bot-form .btn-submit,
+.fl-asr-adaptive .inp-timeout,
+.fl-showAsr-true .inp-asr,
+.fl-showLocale-true .inp-locale {
+  display: block;
 }

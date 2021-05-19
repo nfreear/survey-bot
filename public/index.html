@@ -25,23 +25,27 @@
 <form id="bot-form" class="bot-form">
   <h1> Survey bot </h1>
 
+  <input id="showLocale" type="hidden" value="false" data-regex="(true)" />
+  <input id="showAsr" type="hidden" value="false" data-regex="(true)" />
+  <input id="embed" type="hidden" value="false" data-regex="(true)" />
+
   <p class="inp-timeout">
     <label for="timeout">Speech timeout in seconds</label>
-    <input id="timeout" type="number" value="" min="0" max="30" step="0.5" pattern="\d+(\.\d+)?" />
+    <input id="timeout" type="number" value="1.0" min="0" max="30" step="0.5" pattern="\d+(\.\d+)?" data-regex="(\d+(\.[05])?)" />
 
   <p class="inp-asr">
     <label for="asr">Speech recognizer mode</label>
-    <select id="asr" data-regex="^(adaptive|default)$">
+    <select id="asr" data-regex="(adaptive|default)">
       <option>adaptive</option> <option>default</option>
     </select>
 
   <p class="inp-locale">
     <label for="locale">Language</label>
-    <select id="locale" data-regex="^(en-GB|fr-FR)$">
-      <option value="en-GB">English</option> <option value="fr-FR">Français</option>
+    <select id="locale" data-regex="(en-GB|fr-FR|es-ES)">
+      <option value="en-GB">English</option> <option value="fr-FR">Français</option> <option value="es-ES">Espanol</option>
     </select>
 
-  <p><button type="submit">Launch the Bot</button>
+  <p class="btn-submit"><button type="submit">Launch the Bot</button>
 </form>
 
 
