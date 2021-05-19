@@ -1,5 +1,6 @@
 <!doctype html><html lang="en"><meta charset="utf-8"><title>Survey-Bot</title>
 
+<meta name="robots" content="noindex, nofollow" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <meta name="copyright" content="© Nick Freear" />
 
@@ -22,8 +23,8 @@
 ></script> -->
 
 
-<form id="bot-form" class="bot-form">
-  <h1> Survey bot </h1>
+<form id="bot-form" class="bot-form" aria-labelledby="bot-label">
+  <h1 id="bot-label"> Survey bot </h1>
 
   <input id="showLocale" type="hidden" value="false" data-regex="(true)" />
   <input id="showAsr" type="hidden" value="false" data-regex="(true)" />

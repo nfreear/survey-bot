@@ -1,5 +1,5 @@
 /**
- * Plugin to serve ".env" configuration variables via JSON.
+ * Plugin to serve ".env" configuration variables via a JSON endpoint.
  *
  * @copyright © Nick Freear 2021.
  * @author Nick Freear, 22-Jul-2020.

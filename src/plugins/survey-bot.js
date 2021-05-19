@@ -116,7 +116,7 @@ class SurveyBot extends Clonable { // PluginBase {
         break;
 
       default:
-        this.logger.info(this.name, 'Error: default');
+        this.logger.error(`Error: unexpected intent: ${input.intent} (${this.name})`);
         break;
     }
 
