@@ -35,6 +35,8 @@ const fetch = window.fetch;
     OPT.speech.useAdaptive = data.asr === 'adaptive';
 
     launchBot(OPT);
+
+    document.body.classList.add('bot-launched');
   });
 
   initialize(OPT);
@@ -90,5 +92,5 @@ async function getConfigJson() {
 function param(regex, def = null) {
   const matches = window.location.href.match(regex);
 
-  return matches ? matches[1] : def;
+  return matches ? decodeURIComponent(matches[1]) : def;
 }
