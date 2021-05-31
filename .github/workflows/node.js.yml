@@ -1,0 +1,31 @@
+# See :~ https://github.com/actions/starter-workflows/blob/master/ci/node.js.yml
+# See :~ https://github.com/axa-group/nlp.js/blob/master/.github/workflows/node.js.yml
+
+name: Node.js CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 10.x, 14.x ] # RHEL 8 - Node 10.x.
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
+
+# End.

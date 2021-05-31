@@ -35,9 +35,9 @@ class SurveyBot extends Clonable { // PluginBase {
   }
 
   loadSurvey () {
-    const { introTexts, endTexts, endEarlyTexts, questionTemplate, questions } = SURVEY;
+    const { locale, introTexts, endTexts, endEarlyTexts, questionTemplate, questions } = SURVEY;
 
-    this.survey = { introTexts, endTexts, endEarlyTexts, questionTemplate, questions };
+    this.survey = { locale, introTexts, endTexts, endEarlyTexts, questionTemplate, questions };
 
     // WAS: this.signoff = SURVEY.signoff;
   }
@@ -79,7 +79,7 @@ class SurveyBot extends Clonable { // PluginBase {
   run (input) {
     this.logger.info(`${this.name}.run()`);
 
-    console.log(input);
+    // console.log(input);
 
     let response = 'Woops!';
     let metaData = { intent: input.intent, theEnd: false };
@@ -99,7 +99,7 @@ class SurveyBot extends Clonable { // PluginBase {
       case 'None':
         const result = this.parseAnswer(input);
 
-        console.log('Answer:', result);
+        // console.log('Answer:', result);
 
         if (result) {
           /** @TODO: Save the 'answer' text ?! */
@@ -129,11 +129,15 @@ class SurveyBot extends Clonable { // PluginBase {
 
       metaData.question = response;
 
+      input._Answer = metaData;
+
       // Slightly arbitrary 10ms delay!
       setTimeout(() => this.sendEvent(CONV, EVENT_RUN, metaData), 10);
     }
 
     // this.logToFile(input);
+
+    // console.log(input);
 
     return input;
   }
@@ -141,7 +145,11 @@ class SurveyBot extends Clonable { // PluginBase {
   initialize () {
     const directlineCon = this.directlineCon = this.container.get('directline');
 
-    console.log('DL connector:', directlineCon);
+    if (!directlineCon) {
+      return this.logger.warn(`Warning: directline connector missing? (${this.name})`);
+    }
+
+    // console.log('DL connector:', directlineCon);
 
     directlineCon.onCreateConversation = (ctr, conv) => {
       console.log('onCreateConversation:', conv);
@@ -177,6 +185,10 @@ class SurveyBot extends Clonable { // PluginBase {
   }
 
   sendEvent (conv, name, value) {
+    if (!this.directlineCon) {
+      return this.logger.warn(`Warning: directline connector missing? (${this.name})`);
+    }
+
     this.directlineCon.say({
       type: 'event',
       name: name || 'myCustomEvent',

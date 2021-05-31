@@ -63,6 +63,7 @@
       "intent": "survey.end.early",
       "utterances": [
         "End the survey",
+        "stop the quiz",
         "Stop asking",
         "I'm bored",
         "Enough already",

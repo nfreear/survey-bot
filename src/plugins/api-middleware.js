@@ -65,7 +65,8 @@ class ServeApiMiddleware extends Clonable {
           };
           // res.header('Content-Type', 'text/plain; charset=utf-8');
           res.json(CONFIG);
-          console.log('/api/config.json:', CONFIG);
+          this.logger.info('/api/config.json:');
+          // console.log('/api/config.json:', CONFIG);
         } catch (err) {
           this.logger.error('Error in "/api/config.json" route.');
           this.logger.error(err);

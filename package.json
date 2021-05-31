@@ -6,7 +6,7 @@
   "license": "proprietary",
   "repository": "https://github.com/nfreear/survey-bot.git",
   "engines": {
-    "node": "15.x"
+    "node": ">= 10.x"
   },
   "dependencies": {
     "@nlpjs/basic": "^4.22.0",
@@ -21,6 +21,10 @@
     "@MS/Cog-speech-sdk": "https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@1.16.0/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle-min.js"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^27.0.3"
   }
 }
