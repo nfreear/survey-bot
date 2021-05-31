@@ -116,7 +116,9 @@ class SurveyBot extends Clonable { // PluginBase {
         break;
 
       default:
-        this.logger.error(`Error: unexpected intent: ${input.intent} (${this.name})`);
+        // Easier to test an exception!
+        throw new Error(`Unexpected intent: '${input.intent}' (${this.name})`);
+        // Was: this.logger.error(`Error: unexpected intent: ${input.intent} (${this.name})`);
         break;
     }
 
@@ -186,7 +188,7 @@ class SurveyBot extends Clonable { // PluginBase {
 
   sendEvent (conv, name, value) {
     if (!this.directlineCon) {
-      return this.logger.warn(`Warning: directline connector missing? (${this.name})`);
+      return; // this.logger.warn(`Warning: directline connector missing? (${this.name})`);
     }
 
     this.directlineCon.say({
