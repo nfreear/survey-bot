@@ -1,5 +1,8 @@
+/**
+ * Unit test for `bot-config.json`
+ */
 
-const CONF = require('../conf.json');
+const CONF = require('../bot-config.json'); // Was: '../conf.json'
 
 describe('NLP.js Chat-bot configuration:', () => {
   // .
