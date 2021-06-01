@@ -3,7 +3,6 @@
  */
 
 module.exports = [
-
   {
     message: "I'm no", // I'm called Nick.
     channel: 'directline',
@@ -11,7 +10,7 @@ module.exports = [
     from: { id: 'nick', name: 'Nick User', role: 'user' },
     activity: {
       channelData: {
-        surveyData: {},
+        surveyData: { qIndex: 0 },
         clientActivityID: '1622446997389vlyanmhkvsb',
         clientTimestamp: '2021-05-31T07:43:17.389Z'
       },
@@ -79,7 +78,7 @@ module.exports = [
     from: { id: 'nick', name: 'Nick User', role: 'user' },
     activity: {
       channelData: {
-        surveyData: {},
+        surveyData: { qIndex: 1 },
         clientActivityID: '16224470160320mczrb7dh82',
         clientTimestamp: '2021-05-31T07:43:36.032Z'
       },
@@ -120,7 +119,7 @@ module.exports = [
     entities: [],
     sourceEntities: [],
     answers: [],
-    answer: '_Question 3 of 4._ And what is your complete address?',
+    _answer: '_Question 3 of 4._ And what is your complete address?',
     actions: [],
     sentiment: {
       score: 0,
@@ -131,8 +130,8 @@ module.exports = [
       locale: undefined,
       vote: 'neutral'
     },
-    text: '_Question 3 of 4._ And what is your complete address?',
-    inputHint: 'expectingInput',
+    _text: '_Question 3 of 4._ And what is your complete address?',
+    _inputHint: 'expectingInput',
     _Answer: {
       intent: 'None',
       theEnd: false,
@@ -149,7 +148,7 @@ module.exports = [
     from: { id: 'nick', name: 'Nick User', role: 'user' },
     activity: {
       channelData: {
-        surveyData: {},
+        surveyData: { qIndex: 2 },
         clientActivityID: '162244703536858b9rwj6r5p',
         clientTimestamp: '2021-05-31T07:43:55.368Z'
       },
@@ -218,7 +217,7 @@ module.exports = [
     from: { id: 'nick', name: 'Nick User', role: 'user' },
     activity: {
       channelData: {
-        surveyData: {},
+        surveyData: { qIndex: 3 },
         clientActivityID: '1622447061062j40zoasp46',
         clientTimestamp: '2021-05-31T07:44:21.063Z'
       },

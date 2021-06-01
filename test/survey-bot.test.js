@@ -27,6 +27,7 @@ describe('Survey Bot plugin:', () => {
       expect(plugin.get('questions')).toHaveLength(4);
       expect(plugin.get('introTexts')).toHaveLength(2);
       expect(plugin.get('endTexts')).toHaveLength(2);
+      expect(plugin.get('questionTemplate')).toContain('{Q}');
       expect(plugin.get('locale')).toBe('en-GB');
     });
   });
@@ -38,6 +39,12 @@ describe('Survey Bot plugin:', () => {
       const output = plugin.run(startInput);
 
       expect(output.answer).toContain('Question 1 of 4');
+    });
+
+    it('Should respond OK to the `survey.answer` intent', () => {
+      const output = plugin.run(answerInput[0]);
+
+      expect(output.answer).toContain('Question 2 of 4');
     });
 
     it('Should respond OK to the `survey.end.early` intent', () => {

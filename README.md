@@ -14,6 +14,14 @@ Uses:
 * [Webchat.js][]
 * [MS Speech SDK][speech-sdk]
 
+## Usage
+
+```
+npm i
+npm start
+npm test
+```
+
 ---
 <!-- © 2021 Nick Freear. -->
 
