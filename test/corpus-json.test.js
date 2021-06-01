@@ -1,3 +1,6 @@
+/**
+ * Unit test for `bot/corpus-en.json`.
+ */
 
 const { name, locale, data } = require('../bot/corpus-en.json');
 

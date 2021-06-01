@@ -17,7 +17,9 @@ Uses:
 ## Usage
 
 ```
-npm i
+npm install
+cp -n .env.example .env
+vi .env
 npm start
 npm test
 ```

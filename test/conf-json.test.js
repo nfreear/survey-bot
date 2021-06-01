@@ -1,11 +1,15 @@
 /**
- * Unit test for `bot-config.json`
+ * Unit test for `loadBotConfig()`.
+ *
+ * @WAS Unit test for `bot-config.json`.
  */
 
-const CONF = require('../bot-config.json'); // Was: '../conf.json'
+const { loadBotConfig } = require('../src/load-bot-config');
+
+// Was: const CONF = require('../bot-config.json'); // Was: '../conf.json'
 
 describe('NLP.js Chat-bot configuration:', () => {
-  // .
+  const CONF = loadBotConfig();
 
   it('Should contain a `use` array.', () => {
     expect(CONF.use).toHaveLength(4);
@@ -17,8 +21,8 @@ describe('NLP.js Chat-bot configuration:', () => {
   });
 
   it('Should contain a server `port` number.', () => {
-    expect(CONF.settings['api-server'].port).toEqual(3000);
-    expect(CONF).toHaveProperty('settings.api-server.port', 3000);
+    expect(CONF.settings['api-server'].port).toEqual(8008); // Was: 3000;
+    expect(CONF).toHaveProperty('settings.api-server.port', 8008); // Was: 3000;
   });
 
   it('Should contain a server client-path.', () => {

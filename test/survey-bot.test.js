@@ -1,4 +1,5 @@
 /**
+ * Unit test for the `BotSurvey` plugin.
  *
  * @author Nick Freear, 31-May-2021.
  */
