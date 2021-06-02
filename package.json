@@ -12,7 +12,8 @@
     "@nlpjs/basic": "^4.22.0",
     "@nlpjs/directline-connector": "^4.22.0",
     "@nlpjs/express-api-server": "^4.22.0",
-    "@nlpjs/msbf-connector": "^4.22.0"
+    "@nlpjs/msbf-connector": "^4.22.0",
+    "pm2": "^4.5.6"
   },
   "devDependencies": {
     "jest": "^27.0.3"
@@ -24,7 +25,11 @@
     "@MS/Cog-speech-sdk": "https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@1.16.0/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle-min.js"
   },
   "scripts": {
-    "start": "node index.js -- --X_NOT_port=8888",
+    "pm:start": "pm2 start ./index.js --name 'survey-bot'",
+    "pm:stop": "pm2 stop survey-bot",
+    "pm:list": "pm2 list",
+    "pm:logs": "pm2 logs survey-bot",
+    "start": "node ./index.js -- --X_NOT_port=8888",
     "test": "jest --verbose"
   }
 }

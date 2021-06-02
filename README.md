@@ -13,15 +13,25 @@ Uses:
 * [NLP.js][]
 * [Webchat.js][]
 * [MS Speech SDK][speech-sdk]
+* [pm2][]
 
 ## Usage
 
-```
+```sh
 npm install
 cp -n .env.example .env
-vi .env
+vi .env # Edit '.env'
 npm start
 npm test
+```
+
+Daemon / pm2 usage:
+
+```sh
+npm run pm:start
+npm run pm:stop
+npm run pm:logs # Run tail on the logs.
+npm run pm:list
 ```
 
 ---
@@ -38,6 +48,8 @@ npm test
 [speech-cdn]: https://jsdelivr.com/package/npm/microsoft-cognitiveservices-speech-sdk?path=distrib%2Fbrowser
 [speech-raw]: https://aka.ms/csspeech/jsbrowserpackageraw
   "Via: github.com/Azure-Samples/cognitive-services-speech-sdk/.."
+[pm2]: https://pm2.keymetrics.io/docs/usage/process-management/
+  "PM2 is a daemon process manager that will help you manage and keep your application online 24/7."
 
 [gh-badge]: https://github.com/nfreear/survey-bot/actions/workflows/node.js.yml/badge.svg
 [gh-link]: https://github.com/nfreear/survey-bot/actions "Test status ~ 'Node.js CI'"
