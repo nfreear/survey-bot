@@ -31,9 +31,13 @@ export async function launchBot (options = { speech: {} }) {
       const ACT = action.payload ? action.payload.activity : null;
 
       if (action.type === 'DIRECT_LINE/POST_ACTIVITY') {
-        if (surveyData) {
-          ACT.channelData = { surveyData };
-        }
+        ACT.channelData = {
+          surveyData: surveyData || null,
+          speechOpt: options.speech,
+
+          metaMethod: action.meta.method, // "speech"
+          userAgent: window.navigator.userAgent,
+        };
 
         // We are using the simple-update-in package to update "action" with partial deep cloning.
         // action = simpleUpdateIn(action, ['payload', 'activity', 'channelData', 'email'], () => 'j.doe@example.com');

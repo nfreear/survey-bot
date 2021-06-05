@@ -2,6 +2,11 @@
  Survey-Bot styles | @copyright © Nick Freear.
 */
 
+:root {
+  --border: 2px solid #aaa;
+  --width: 33rem;
+}
+
 *,
 *:before,
 *:after {
@@ -23,9 +28,22 @@ body {
 
 h1 { font-size: 1.4rem; margin: .3rem 0; }
 
-button,
-select,
-input {
+footer {
+  border-top: var(--border);
+  font-size: small;
+  padding: .8rem;
+  position: absolute;
+  bottom: 0;
+  width: var(--width);
+
+  display: none; /* For now ?! */
+}
+
+.bot-launched footer { display: none; }
+
+.bot-form button,
+.bot-form select,
+.bot-form input {
   color: inherit;
   font-family: inherit;
   font-size: inherit;
@@ -60,8 +78,8 @@ button { cursor: pointer; }
 }
 
 #webchat {
-  border-left: 2px solid #aaa;
-  border-right: 2px solid #aaa;
+  border-left: var(--border);
+  border-right: var(--border);
   height: 100%;
   width: 100%;
 }
@@ -81,21 +99,23 @@ button { cursor: pointer; }
 .bot-form {
   position: fixed;
   background: #f8f8f8;
-  border: 2px solid #aaa;
+  border: var(--border);
   border-top: none;
   display: block;
   font-size: 1.05rem;
   max-height: 20rem;
   padding: 0 .8rem;
-  width: 33rem;
+  width: var(--width);
   z-index: 999;
 }
 
 @media screen and (max-width: 33rem) {
   body { font-size: 1rem; }
 
+  footer,
   .bot-form {
-    max-width: 33rem;
+    max-width: var(--width);
+    min-width: 21rem;
     width: auto;
   }
 }

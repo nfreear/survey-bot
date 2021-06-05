@@ -34,6 +34,10 @@ const fetch = window.fetch;
 
     OPT.speech.useAdaptive = data.asr === 'adaptive';
 
+    OPT.userID = data.userID;
+    OPT.username = data.username;
+    OPT.locale = data.locale;
+
     launchBot(OPT);
 
     document.body.classList.add('bot-launched');
@@ -50,9 +54,9 @@ function initialize (OPT) {
 
   // BOT_FORM[0].value = parseFloat(param(/timeout=(\d+(\.[05])?)/, OPT.speech.defaultTimeout));
 
-  const SHOW_FORM = !param(/showForm=(false)/i);
+  // const SHOW_FORM = !param(/showForm=(false)/i);
 
-  document.body.classList.add(`load-${SHOW_FORM ? 'show' : 'hide'}-form`);
+  // document.body.classList.add(`load-${SHOW_FORM ? 'show' : 'hide'}-form`);
 
   if (!SHOW_FORM) {
     const submitEvent = new Event('submit');
@@ -67,7 +71,8 @@ function setFormFromUrlParams(form) {
     const re = new RegExp(`${el.id}=${el.dataset.regex ? el.dataset.regex : '([^&]+)'}`);
 
     el.value = param(re, el.value);
-    document.body.classList.add(`fl-${el.id}-${el.value}`);
+    const value = el.value.replace(/ /g, '-');
+    document.body.classList.add(`fl-${el.id}-${value}`);
     data[el.id] = el.value;
   });
   return data;

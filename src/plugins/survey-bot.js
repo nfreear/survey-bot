@@ -77,7 +77,9 @@ class SurveyBot extends Clonable { // PluginBase {
   }
 
   run (input) {
-    this.logger.info(`${this.name}.run()`);
+    const userID = input.from.id; // OR: input.activity.from.id;
+
+    this.logger.info(`${this.name}.run(): userID=${userID}`);
 
     // console.log(input);
 
