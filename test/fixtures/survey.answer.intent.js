@@ -188,7 +188,7 @@ module.exports = [
     entities: [],
     sourceEntities: [],
     answers: [],
-    answer: '_Question 4 of 4._ Can you read: “If you can keep your head when all about you Are losing theirs and blaming it on you …”?',
+    _answer: '_Question 4 of 4._ Can you read: “If you can keep your head when all about you Are losing theirs and blaming it on you …”?',
     actions: [],
     sentiment: {
       score: 0,
@@ -199,8 +199,8 @@ module.exports = [
       locale: undefined,
       vote: 'neutral'
     },
-    text: '_Question 4 of 4._ Can you read: “If you can keep your head when all about you Are losing theirs and blaming it on you …”?',
-    inputHint: 'expectingInput',
+    _text: '_Question 4 of 4._ Can you read: “If you can keep your head when all about you Are losing theirs and blaming it on you …”?',
+    _inputHint: 'expectingInput',
     _Answer: {
       intent: 'survey.answer',
       theEnd: false,
@@ -250,7 +250,7 @@ module.exports = [
     entities: [],
     sourceEntities: [],
     answers: [],
-    answer: "Thank you for your help! That's the end ;)",
+    _answer: "Thank you for your help! That's the end ;)",
     actions: [],
     sentiment: {
       score: 0,
@@ -261,8 +261,8 @@ module.exports = [
       locale: undefined,
       vote: 'neutral'
     },
-    text: "Thank you for your help! That's the end ;)",
-    inputHint: 'expectingInput',
+    _text: "Thank you for your help! That's the end ;)",
+    _inputHint: 'expectingInput',
     _Answer: {
       intent: 'survey.answer',
       theEnd: true,

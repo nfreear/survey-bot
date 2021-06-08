@@ -52,6 +52,8 @@ function initialize (OPT) {
 
   const data = setFormFromUrlParams(BOT_FORM);
 
+  const SHOW_FORM = data.showForm === 'true';
+
   // BOT_FORM[0].value = parseFloat(param(/timeout=(\d+(\.[05])?)/, OPT.speech.defaultTimeout));
 
   // const SHOW_FORM = !param(/showForm=(false)/i);

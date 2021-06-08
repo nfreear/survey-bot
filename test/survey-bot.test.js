@@ -54,7 +54,7 @@ describe('Survey Bot plugin:', () => {
       expect(output.answer).toContain('Good bye');
     });
 
-    it('Should error for the `do.you.stammer` intent', () => {
+    it('Should throw an Error for the `do.you.stammer` intent', () => {
       expect(() => plugin.run(otherInput)).toThrow(Error);
       expect(() => plugin.run(otherInput)).toThrow(/Unexpected intent/);
     });
