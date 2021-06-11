@@ -25,7 +25,19 @@ npm start
 npm test
 ```
 
+## Server
+
 Daemon / pm2 usage:
+
+```sh
+sudo service pm2-pm2 restart
+sudo service pm2-pm2 reload
+sudo service pm2-pm2 stop
+```
+
+* [docs/SERVER.md][]
+
+Legacy:
 
 ```sh
 npm run pm:start
