@@ -46,7 +46,7 @@ class SecurityHeaderMiddleware extends Clonable {
 
     this.apiEnable = API_ENABLE;
 
-    console.log('apiEnable:', API_ENABLE);
+    // console.log('apiEnable:', API_ENABLE);
 
     this.initialize();
   }
@@ -83,7 +83,7 @@ class SecurityHeaderMiddleware extends Clonable {
       next();
     });
 
-    console.log(apiServer);
+    // console.log(apiServer);
 
     return;
 

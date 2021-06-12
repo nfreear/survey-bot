@@ -10,7 +10,10 @@ const { loadBotConfig } = require('./src/load-bot-config');
 (async () => {
   const CONFIG = loadBotConfig();
 
-  console.log('Bot config:', CONFIG);
+  if (CONFIG.verbose) {
+    console.log('Argv:', process.argv);
+    console.log('Bot config:', CONFIG);
+  }
 
   const dock = await dockStart(CONFIG);
 

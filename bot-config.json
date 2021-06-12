@@ -22,6 +22,8 @@
       "serveBot": true
     },
 
+    "surveyBot": { },
+
     "msbf": {
       "apiPath": "",
       "messagesPath": "/api/messages",
@@ -29,6 +31,10 @@
       "X_appPassword": "<YOUR MICROSOFT BOT PASSWORD>"
     }
   },
+
+  "nlpjs": { },
+
+  "verbose": false,
 
   "use": [ "Basic", "ConsoleConnector", "ExpressApiServer", "DirectlineConnector" ],
 

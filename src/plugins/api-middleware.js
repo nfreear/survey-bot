@@ -7,6 +7,10 @@
 
 const { defaultContainer, Clonable } = require('@nlpjs/core');
 
+const { loadSanitizeEnv } = require('../load-sanitize-env');
+const { getNlpjsVersion } = require('../load-bot-config');
+// const PKG = require('../../package.json');
+
 // const { PluginBase, defaultContainer } = require('../plugin-base');
 
 class ServeApiMiddleware extends Clonable {
@@ -35,8 +39,9 @@ class ServeApiMiddleware extends Clonable {
 
   start () {
     const {
-      speechSubscriptionKey, speechRegion, speechDefaultTimeout, speechUseAdaptive, analyticsId
-    } = process.env;
+      speechSubscriptionKey, speechRegion, speechDefaultTimeout, speechUseAdaptive,
+      analyticsId
+    } = loadSanitizeEnv();
 
     const server = this.container.get('api-server').app;
 
@@ -55,12 +60,13 @@ class ServeApiMiddleware extends Clonable {
         try {
           const CONFIG = {
             _: this.name,
+            nlpjs: getNlpjsVersion(),
             analyticsId,
             speech: {
               region: speechRegion,
               subscriptionKey: speechSubscriptionKey,
               defaultTimeout: parseFloat(speechDefaultTimeout),
-              useAdaptive: speechUseAdaptive === 'true',
+              useAdaptive: speechUseAdaptive,
             }
           };
           // res.header('Content-Type', 'text/plain; charset=utf-8');

@@ -7,6 +7,8 @@
 
 const mysql = require('mysql2/promise');
 
+const { loadSanitizeEnv } = require('./load-sanitize-env');
+
 // Table names.
 const TBL_ONHEAR = 'onhear_transcript';
 
@@ -23,7 +25,7 @@ class Database {
   }
 
   async connect () {
-    const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASE, DB_DEBUG } = process.env;
+    const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASE, DB_DEBUG } = loadSanitizeEnv();
 
     console.log('Database:', DATABASE);
 
@@ -35,7 +37,7 @@ class Database {
       password: DB_PASSWORD || '',
       database: DATABASE || 'test',
       charset: 'UTF8_GENERAL_CI',
-      debug: DB_DEBUG === 'true',
+      debug: DB_DEBUG,
     });
 
     // Query database
