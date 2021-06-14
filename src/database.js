@@ -5,7 +5,8 @@
  * @see https://npmjs.com/package/mysql2;
  */
 
-const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
+// const mysql = require('mysql2/promise');
 
 const { loadSanitizeEnv } = require('./load-sanitize-env');
 
@@ -17,49 +18,70 @@ class Database {
     this.connection = null;
   }
 
-  async getConnection () {
+  getConnection () {
     if (!this.connection) {
-      this.connection = await this.connect();
+      this.connection = this.connect();
     }
     return this.connection;
   }
 
-  async connect () {
+  connect () { // NOT: 'async'
     const { DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DATABASE, DB_DEBUG } = loadSanitizeEnv();
 
-    console.log('Database:', DATABASE);
-
     // create the connection
-    const conn = await mysql.createConnection({
+    const conn = mysql.createConnection({
       host: DB_HOST || 'localhost',
       port: DB_PORT ? parseInt(DB_PORT) : 3306,
       user: DB_USER || 'root',
       password: DB_PASSWORD || '',
       database: DATABASE || 'test',
       charset: 'UTF8_GENERAL_CI',
-      debug: DB_DEBUG,
+      debug: DB_DEBUG || false,
     });
 
     // Query database
     // const [rows, fields] = await conn.execute('SELECT * FROM `table` WHERE `name` = ? AND `age` > ?', ['Morty', 14]);
 
-    // console.log('dbConnect:', conn);
+    console.log('dbConnect:', DATABASE, conn.threadId);
 
     return conn;
   }
 
-  async onHearInsert(userID, conversationId, text, payloadObj) {
-    const conn = await this.getConnection();
+  query(sqlQueryStr, dataArray = []) {
+    return this.execute(sqlQueryStr, dataArray);
+  }
 
-    const result = await conn.execute(
+  execute(sqlQueryStr, dataArray = []) {
+    const conn = this.getConnection();
+
+    const promise = new Promise((resolve, reject) => {
+      conn.execute(
+        sqlQueryStr, dataArray, (err, results, fields) => {
+          if (err) {
+            return reject(err);
+          }
+
+          if (fields) {
+            resolve([ results, fields ]);
+          } else {
+            resolve(results);
+          }
+        }
+      );
+    });
+
+    return promise;
+  }
+
+  onHearInsert(userID, conversationId, text, payloadObj) { // Not: 'async' !
+    return this.execute(
       `INSERT INTO \`${TBL_ONHEAR}\` (user_id, conversation_id, text, payload) VALUES (?, ?, ?, ?)`,
       [ userID, conversationId, text, JSON.stringify(payloadObj) ]
     );
-
-    return result;
   }
 }
 
+// The singleton database connection.
 const database = new Database();
 
 /* onHearInsert ~ Result: [
