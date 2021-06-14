@@ -23,20 +23,25 @@ if (something && something.value && something.value.joke) {
 
 ## onIntent(survey.start)
 surveyBot
+logToDatabase
 ->output.text
 
 ## onIntent(survey.end.early)
 surveyBot
+logToDatabase
 ->output.text
 
 ## onIntent(survey.repeat.question)
 surveyBot
+logToDatabase
 ->output.text
 
 ## onIntent(survey.answer)
 surveyBot
+logToDatabase
 ->output.text
 
 ## onIntent(None)
 surveyBot
+logToDatabase
 ->output.text

@@ -18,7 +18,7 @@ export async function launchBot (options = { speech: {} }) {
   // https://github.com/microsoft/BotFramework-WebChat/tree/main/samples/04.api/b.piggyback-on-outgoing-activities#
   // https://github.com/microsoft/BotFramework-WebChat/issues/2555#issuecomment-549454620
 
-  let surveyData = { theEnd: false };
+  let surveyData = { theEnd: false, qIndex: -1 };
 
   let isFirstIncoming = true;
 

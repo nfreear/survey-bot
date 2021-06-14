@@ -5,13 +5,16 @@
  * @see https://npmjs.com/package/mysql2;
  */
 
+// $ egrep -rn '(async|await)' src/
+
 const mysql = require('mysql2');
 // const mysql = require('mysql2/promise');
 
 const { loadSanitizeEnv } = require('./load-sanitize-env');
 
 // Table names.
-const TBL_ONHEAR = 'onhear_transcript';
+const TBL_TRANSCRIPT = 'run_transcript';
+const TBL_ONHEAR = 'onhear_transcript'; // Deprecated!
 
 class Database {
   constructor() {
@@ -40,7 +43,7 @@ class Database {
     });
 
     // Query database
-    // const [rows, fields] = await conn.execute('SELECT * FROM `table` WHERE `name` = ? AND `age` > ?', ['Morty', 14]);
+    // const [rows, fields] = conn.execute('SELECT * FROM `table` WHERE `name` = ? AND `age` > ?', ['Morty', 14]);
 
     console.log('dbConnect:', DATABASE, conn.threadId);
 
@@ -73,10 +76,19 @@ class Database {
     return promise;
   }
 
-  onHearInsert(userID, conversationId, text, payloadObj) { // Not: 'async' !
+  logTranscript(userID, conversationId, text, answer, intent, score = null, payloadObj = {}) {
     return this.execute(
-      `INSERT INTO \`${TBL_ONHEAR}\` (user_id, conversation_id, text, payload) VALUES (?, ?, ?, ?)`,
-      [ userID, conversationId, text, JSON.stringify(payloadObj) ]
+      `INSERT INTO \`${TBL_TRANSCRIPT}\` (user_id, conversation_id, text, answer, intent, score, payload) VALUES (?, ?, ?, ?, ?, ?, ?)`,
+      [ userID, conversationId, text, answer, intent, score, JSON.stringify(payloadObj) ]
+    );
+  }
+
+  /** @TODO ~ Deprecated / To DELETE ?!
+  */
+  onHearInsert(userID, conversationId, text, activityObj) { // Not: 'async' !
+    return this.execute(
+      `INSERT INTO \`${TBL_ONHEAR}\` (user_id, conversation_id, text, activity) VALUES (?, ?, ?, ?)`,
+      [ userID, conversationId, text, JSON.stringify(activityObj) ]
     );
   }
 }
@@ -96,4 +108,4 @@ const database = new Database();
   undefined
 ] */
 
-module.exports = { database, TBL_ONHEAR }; // { getConnection, onHearInsert };
+module.exports = { database, TBL_ONHEAR, TBL_TRANSCRIPT }; // { getConnection, onHearInsert };

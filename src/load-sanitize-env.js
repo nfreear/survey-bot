@@ -12,6 +12,7 @@ function loadSanitizeEnv () {
   const {
     VERBOSE,
     API_ENABLE,
+    LOG_TO_DB,
 
     HTTP_PORT,
 
@@ -31,6 +32,7 @@ function loadSanitizeEnv () {
     API_ENABLE: parseBool(API_ENABLE),
 
     VERBOSE: parseBool(VERBOSE),
+    LOG_TO_DB: parseBool(LOG_TO_DB),
 
     speechUseAdaptive: parseBool(speechUseAdaptive),
     speechSubscriptionKey,
