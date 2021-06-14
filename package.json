@@ -26,6 +26,8 @@
     "@MS/Cog-speech-sdk": "https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@1.16.0/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle-min.js"
   },
   "scripts": {
+    "db:migrate": "node ./src/db-migrate.js",
+    "db:query": "node ./src/db-query.js",
     "pm:start": "pm2 start ./index.js --name 'survey-bot'",
     "pm:stop": "pm2 stop survey-bot",
     "pm:list": "pm2 list",

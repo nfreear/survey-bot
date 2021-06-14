@@ -156,7 +156,7 @@ class SurveyBot extends Clonable { // PluginBase {
     // console.log('DL connector:', directlineCon);
 
     directlineCon.onCreateConversation = (ctr, conv) => {
-      console.log('onCreateConversation:', conv);
+      this.logger.log(`onCreateConversation ~ convId:${conv.conversationId}`);
 
       this.get('introTexts').forEach(text => {
         this.say(conv, text);
