@@ -26,6 +26,13 @@
     "@MS/Webchat": "https://cdn.botframework.com/botframework-webchat/4.13.0/webchat.js",
     "@MS/Cog-speech-sdk": "https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@1.16.0/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle-min.js"
   },
+  "files": [
+    "bot/*",
+    "src/**",
+    "src/plugins/*",
+    "bot-config.json",
+    "server.js"
+  ],
   "scripts": {
     "db:migrate": "node ./src/db-migrate.js",
     "db:query": "node ./src/db-query.js",
