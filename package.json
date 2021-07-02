@@ -1,10 +1,11 @@
 {
-  "private": true,
   "name": "@nfreear/survey-bot",
+  "version": "1.1.0",
   "description": "A speech-enabled Chat-bot. Get the user to answer questions and talk about themselves!",
   "author": "© Nick Freear",
   "license": "proprietary",
   "repository": "https://github.com/nfreear/survey-bot.git",
+  "main": "./index.js",
   "engines": {
     "node": ">= 10.x"
   },
@@ -32,7 +33,7 @@
     "pm:stop": "pm2 stop survey-bot",
     "pm:list": "pm2 list",
     "pm:logs": "pm2 logs survey-bot",
-    "start": "node ./index.js -- --X_NOT_port=8888",
+    "start": "node ./server.js -- --X_NOT_port=8888",
     "test": "jest --verbose"
   }
 }
