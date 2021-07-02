@@ -1,10 +1,10 @@
 /**
  * Unit test for the `BotSurvey` plugin.
  *
- * @author Nick Freear, 31-May-2021.
+ * @copyright © Nick Freear, 31-May-2021.
  */
 
-const SurveyBot = require('../src/plugins/survey-bot');
+const { SurveyBot } = require('../index');
 
 const startInput = require('./fixtures/survey.start.intent')[0];
 const endEarlyInput = require('./fixtures/survey.end.early.intent')[0];

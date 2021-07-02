@@ -1,8 +1,7 @@
 /**
  * Plugin to serve ".env" configuration variables via a JSON endpoint.
  *
- * @copyright © Nick Freear 2021.
- * @author Nick Freear, 22-Jul-2020.
+ * @copyright © Nick Freear, 22-July-2020.
  */
 
 const { defaultContainer, Clonable } = require('@nlpjs/core');

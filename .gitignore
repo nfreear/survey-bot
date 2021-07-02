@@ -1,9 +1,11 @@
 
 .env
-_env.js
+_env.*
 node_modules
 *BAK*
 *Untitled*
 .DS_Store
 
-plugin-base.js
+config/
+# plugin-base.js
+db-test.js

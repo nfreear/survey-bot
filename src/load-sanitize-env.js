@@ -1,7 +1,7 @@
 /**
  * Load and sanitize configuration from `.env`
  *
- * @copyright Nick Freear, 10-June-2021.
+ * @copyright © Nick Freear, 10-June-2021.
  */
 
 const { loadEnv } = require('@nlpjs/core-loader');

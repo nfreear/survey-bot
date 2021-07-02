@@ -3,7 +3,7 @@
 
 # survey-bot
 
-A speech-enabled Chat-bot.
+A speech-enabled, server-based Chat-bot.
 
 Get the user to answer questions and talk about themselves!
 
@@ -35,7 +35,7 @@ sudo service pm2-pm2 reload
 sudo service pm2-pm2 stop
 ```
 
-* [docs/SERVER.md][]
+* See: [docs/SERVER.md][]
 
 Legacy:
 

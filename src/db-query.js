@@ -1,6 +1,7 @@
 /**
+ * CLI utility :~ Query the database.
  *
- * @author NDF, 14-Jun-2021.
+ * @copyright © Nick Freear, 14-June-2021.
  */
 
 const { database, TBL_ONHEAR, TBL_TRANSCRIPT } = require('./database');

@@ -1,4 +1,5 @@
 /**
+ * Create a hybrid speech ponyfill factory.
  *
  * @copyright © Nick Freear, 04-May-2021.
  */

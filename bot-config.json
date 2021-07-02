@@ -22,14 +22,13 @@
       "serveBot": true
     },
 
-    "surveyBot": { },
+    "surveyBot": {
+      "surveys": [
+        "./bot/survey-en.json"
+      ]
+    },
 
-    "msbf": {
-      "apiPath": "",
-      "messagesPath": "/api/messages",
-      "X_appId": "<YOUR MICROSOFT BOT APP ID>",
-      "X_appPassword": "<YOUR MICROSOFT BOT PASSWORD>"
-    }
+    "msbf": { }
   },
 
   "nlpjs": { },

@@ -1,5 +1,5 @@
 /**
- * Survey-Bot server.
+ * Run the Survey-Bot server.
  *
  * @copyright © Nick Freear 2021.
  */

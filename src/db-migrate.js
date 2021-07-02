@@ -1,7 +1,7 @@
 /**
- * Create, migrate or drop database table(s).
+ * CLI utility :~ Create, migrate or drop database table(s).
  *
- * @author NDF, 14-Jun-2021.
+ * @copyright © Nick Freear, 14-June-2021.
  */
 
 // DROP TABLE `speech_survey_bot`.`run_transcript`;

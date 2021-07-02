@@ -4,6 +4,12 @@
   "description": "A speech-enabled Chat-bot. Get the user to answer questions and talk about themselves!",
   "author": "© Nick Freear",
   "license": "proprietary",
+  "keywords": [
+    "nlpjs",
+    "chatbot",
+    "nlp",
+    "speech"
+  ],
   "repository": "https://github.com/nfreear/survey-bot.git",
   "main": "./index.js",
   "engines": {
