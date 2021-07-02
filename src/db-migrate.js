@@ -9,6 +9,9 @@
 
 const { database, TBL_ONHEAR, TBL_TRANSCRIPT } = require('./database');
 
+// See :~ https://dev.mysql.com/doc/refman/8.0/en/charset-unicode-sets.html#charset-unicode-sets-general-versus-unicode
+const COLLATION = 'utf8_unicode_ci';
+
 (async () => {
   try {
     // Was: CREATE TABLE \`${TBL_ONHEAR}\`
@@ -19,15 +22,15 @@ const { database, TBL_ONHEAR, TBL_TRANSCRIPT } = require('./database');
         conversation_id varchar(64) NOT NULL COMMENT 'Character count: 36.',
         text text COMMENT 'Utterance / message from user.',
         answer text DEFAULT NULL COMMENT 'Response from the Bot.',
-        intent varchar(64) DEFAULT NULL,
-        score DECIMAL(6, 4) DEFAULT NULL,
+        intent varchar(64) DEFAULT NULL 'The top intent.',
+        score DECIMAL(6, 4) DEFAULT NULL 'The score for the top intent.',
         payload json DEFAULT NULL COMMENT 'Entire "conversation" object.',
         created_at timestamp NULL DEFAULT CURRENT_TIMESTAMP,
         PRIMARY KEY (\`id\`),
         KEY onhear_transcript_userid_idx (\`user_id\`),
         KEY onhear_transcript_convid_idx (\`conversation_id\`)
       )
-      ENGINE InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci
+      ENGINE InnoDB CHARACTER SET utf8 COLLATE ${COLLATION}
     `); // Was: AUTO_INCREMENT=13;
 
     console.log('Database ~ Create table:', TBL_TRANSCRIPT, resCreate);

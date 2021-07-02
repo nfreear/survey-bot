@@ -33,6 +33,7 @@ const fetch = window.fetch;
     OPT.speech.endSilenceTimeoutMs = endSilenceTimeoutMs;
 
     OPT.speech.useAdaptive = data.asr === 'adaptive';
+    OPT.speech.lang = data.locale; // ??
 
     OPT.userID = data.userID;
     OPT.username = data.username;
