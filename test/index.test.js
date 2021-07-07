@@ -2,7 +2,7 @@
  * Unit test for `index.js`.
  */
 
-const { SurveyBot, botConfig } = require('../index');
+const { SurveyBot, botConfig } = require('../src/index');
 
 describe('Exports in index.js:', () => {
 

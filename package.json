@@ -11,7 +11,7 @@
     "speech"
   ],
   "repository": "https://github.com/nfreear/survey-bot.git",
-  "main": "./index.js",
+  "main": "./src/index.js",
   "engines": {
     "node": ">= 10.x"
   },

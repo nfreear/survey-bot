@@ -4,8 +4,8 @@
  * @copyright © Nick Freear 2021.
  */
 
-const SurveyBot = require('./src/plugins/survey-bot');
-const CFG = require('./bot-config.json');
+const SurveyBot = require('./plugins/survey-bot');
+const CFG = require('../bot-config.json');
 
 // @TODO? const { BotSpeech } = require('./public/js/bot-speech');
 

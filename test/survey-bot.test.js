@@ -4,7 +4,7 @@
  * @copyright © Nick Freear, 31-May-2021.
  */
 
-const { SurveyBot } = require('../index');
+const { SurveyBot } = require('../src/index');
 
 const startInput = require('./fixtures/survey.start.intent')[0];
 const endEarlyInput = require('./fixtures/survey.end.early.intent')[0];
