@@ -24,12 +24,20 @@ describe('Exports in index.js:', () => {
       expect(botConfig).toHaveProperty('pathPipeline', './bot/pipelines.md');
     });
 
-    it('Should contain a corpus', () => {
+    it('Should contain a corpus path', () => {
       expect(botConfig).toHaveProperty('settings.nlp.corpora');
     });
 
-    it('Should contain a survey', () => {
+    it('Should contain a survey path', () => {
       expect(botConfig).toHaveProperty('settings.surveyBot.surveys');
+    });
+
+    it('Should NOT contain a `use` property', () => {
+      expect(botConfig).not.toHaveProperty('use');
+    });
+
+    it('Should NOT contain an `api-server` property', () => {
+      expect(botConfig).not.toHaveProperty('settings.api-server');
     });
   });
 });

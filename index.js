@@ -4,10 +4,10 @@
  * @copyright © Nick Freear 2021.
  */
 
-// TODO? const { BotSpeech } = require('./public/js/bot-speech');
-
 const SurveyBot = require('./src/plugins/survey-bot');
 const CFG = require('./bot-config.json');
+
+// @TODO? const { BotSpeech } = require('./public/js/bot-speech');
 
 const botConfig = {
   pathPipeline: CFG.pathPipeline,

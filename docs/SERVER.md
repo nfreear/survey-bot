@@ -1,6 +1,15 @@
 
 ## Setting up PM2 on a Linux server
 
+Summary of steps:
+
+1. Setup a user and group called `pm2`,
+2. Add all real users to `pm2` group,
+3. Export a `PM2_HOME` environment variable,
+4. Install `pm2` globally,
+5. Creating a `pm2` startup script,
+6. Saving the resulting configuration.
+
 ```sh
 ]$ cat /etc/passwd
 
@@ -21,6 +30,7 @@
 
 ]$ sudo /usr/local/bin/pm2 start /var/www/survey-bot/index.js --name='survey-bot'
 
+]$ /usr/local/bin/pm2 save
 
 ]$ sudo service pm2-pm2 status
 ]$ sudo service pm2-pm2 restart
@@ -63,7 +73,14 @@ Saving to: ‘STDOUT’
 
 ```
 
+## Useful links
+
+* [Stackoverflow :~ How to run PM2 so other users…][how-pm2];
+* [PM2 Docs :~ Persistent applications][pm2];
+
 ---
 
+[pm2]: https://pm2.keymetrics.io/docs/usage/startup/
+  "PM2 - Persistent applications: Startup Script Generator"
 [how-pm2]: https://stackoverflow.com/questions/32178443/how-to-run-pm2-so-other-server-users-are-able-to-access-the-process#:~:text=1.%20Create%20user%20PM2
   "StackOverflow: 'How to run pm2 so other server users are able to access the process?'"

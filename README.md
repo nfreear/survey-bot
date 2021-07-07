@@ -3,7 +3,10 @@
 
 # survey-bot
 
-A speech-enabled, server-based Chat-bot.
+This project can be used in two ways:
+
+ 1. As a self-contained, speech-enabled, server-based Chat-bot.
+ 2. A `SurveyBot` plugin, that is exported for re-use in other `NLP.js`-based projects;
 
 Get the user to answer questions and talk about themselves!
 
@@ -46,17 +49,21 @@ npm run pm:logs # Run tail on the logs.
 npm run pm:list
 ```
 
+## License
+
+* License: _proprietary_.
+
 ---
-<!-- © 2021 Nick Freear. -->
+© 2021 Nick Freear.
 
 [node.js]: https://nodejs.org/
   "Node.js® is a JavaScript runtime built on Chrome's V8 JavaScript engine."
 [nlp.js]: https://github.com/axa-group/nlp.js
-  "'NLP.js' is a general natural language utility for Node.js"
+  "'NLP.js' is a general natural language utility for Node.js (AXA Group)"
 [webchat.js]: https://github.com/microsoft/BotFramework-WebChat/releases/tag/v4.13.0
-  "Bot Framework Web Chat Javascript component"
+  "Bot Framework Web Chat Javascript component (Microsoft)"
 [speech-sdk]: https://github.com/microsoft/cognitive-services-speech-sdk-js
-  "Microsoft Cognitive Services Speech SDK for JavaScript"
+  "Cognitive Services Speech SDK for JavaScript (Microsoft)"
 [speech-cdn]: https://jsdelivr.com/package/npm/microsoft-cognitiveservices-speech-sdk?path=distrib%2Fbrowser
 [speech-raw]: https://aka.ms/csspeech/jsbrowserpackageraw
   "Via: github.com/Azure-Samples/cognitive-services-speech-sdk/.."
