@@ -7,6 +7,7 @@
 // import { ENV } from './_env.js';
 import { launchBot } from './launch-bot.js';
 import { FormData } from './form-data.js';
+import { Analytics } from './analytics.js';
 
 const MIN_ALLOW_TIMEOUT = 100;
 // const DEF_TIMEOUT = 3.0;
@@ -52,6 +53,8 @@ const fetch = window.fetch;
 
 function initialize (OPT) {
   console.debug('Configuration:', OPT);
+
+  const ana = new Analytics(OPT.analyticsId);
 
   const data = botForm.setFromUrlParams();
 

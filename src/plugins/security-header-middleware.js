@@ -21,10 +21,10 @@ const HASH = {
 const SECURITY_POLICY = [
   "default-src 'self'",
   "connect-src 'self' https://*.tts.speech.microsoft.com wss://*.stt.speech.microsoft.com",
-  "frame-ancestors 'self' https://*.nquire.org.uk https://*.onlinesurveys.ac.uk",
-  "img-src 'self' blob: data: ",
+  "frame-ancestors 'self' http://localhost:* https://*.nquire.org.uk https://*.onlinesurveys.ac.uk",
+  "img-src 'self' blob: data: https://www.google-analytics.com",
   "object-src 'none'",
-  `script-src 'self' '${HASH.webchat}' '${HASH.speechSdk}' https://nfreear.github.io`, // https://unpkg.com;
+  `script-src 'self' '${HASH.webchat}' '${HASH.speechSdk}' https://www.google-analytics.com https://nfreear.github.io`, // https://unpkg.com;
   "style-src 'self' 'unsafe-inline'",
   "worker-src 'self' blob: "
 ];
