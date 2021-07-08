@@ -6,20 +6,22 @@
 
 // import { ENV } from './_env.js';
 import { launchBot } from './launch-bot.js';
+import { FormData } from './form-data.js';
 
 const MIN_ALLOW_TIMEOUT = 100;
 // const DEF_TIMEOUT = 3.0;
-const BOT_FORM = document.querySelector('#bot-form');
+
+const botForm = new FormData('#bot-form');
 
 const fetch = window.fetch;
 
 (async () => {
   const OPT = await getConfigJson();
 
-  BOT_FORM.addEventListener('submit', ev => {
+  botForm.on('submit', ev => {
     ev.preventDefault();
 
-    const data = getFormDataFromEvent(ev);
+    const data = botForm.getDataFromEvent(ev);
 
     // console.warn('> Submit:', data, ev); return;
 
@@ -51,13 +53,9 @@ const fetch = window.fetch;
 function initialize (OPT) {
   console.debug('Configuration:', OPT);
 
-  const data = setFormFromUrlParams(BOT_FORM);
+  const data = botForm.setFromUrlParams();
 
   const SHOW_FORM = data.showForm === 'true';
-
-  // BOT_FORM[0].value = parseFloat(param(/timeout=(\d+(\.[05])?)/, OPT.speech.defaultTimeout));
-
-  // const SHOW_FORM = !param(/showForm=(false)/i);
 
   // document.body.classList.add(`load-${SHOW_FORM ? 'show' : 'hide'}-form`);
 
@@ -67,38 +65,7 @@ function initialize (OPT) {
   }
 }
 
-function setFormFromUrlParams(form) {
-  const inputFields = [...form.elements].filter(el => el.nodeName !== 'BUTTON');
-  let data = {};
-  inputFields.forEach(el => {
-    const re = new RegExp(`${el.id}=${el.dataset.regex ? el.dataset.regex : '([^&]+)'}`);
-
-    el.value = param(re, el.value);
-    const value = el.value.replace(/ /g, '-');
-    document.body.classList.add(`fl-${el.id}-${value}`);
-    data[el.id] = el.value;
-  });
-  return data;
-}
-
-function getFormDataFromEvent(ev) {
-  const inputFields = [...ev.target.elements].filter(el => el.nodeName !== 'BUTTON');
-  let data = {};
-  inputFields.forEach(el => {
-    const isNum = el.type === 'number';
-    const re = el.dataset.regex ? new RegExp(`^${el.dataset.regex}$`) : null;
-    data[el.id] = isNum ? parseFloat(el.value) : re && re.test(el.value) ? el.value : null;
-  });
-  return data;
-}
-
 async function getConfigJson() {
   const response = await fetch('/api/config.json');
   return response.json();
-}
-
-function param(regex, def = null) {
-  const matches = window.location.href.match(regex);
-
-  return matches ? decodeURIComponent(matches[1]) : def;
 }
