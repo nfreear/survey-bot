@@ -28,9 +28,9 @@
   },
   "x-CDN": {
     "botframework-webchat": "4.13.0",
-    "microsoft-cognitiveservices-speech-sdk": "1.16.0",
+    "microsoft-cognitiveservices-speech-sdk": "1.17.0",
     "@MS/Webchat": "https://cdn.botframework.com/botframework-webchat/4.13.0/webchat.js",
-    "@MS/Cog-speech-sdk": "https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@1.16.0/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle-min.js"
+    "@MS/Cog-speech-sdk": "https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@1.17.0/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle-min.js"
   },
   "files": [
     "bot/*",
@@ -42,7 +42,7 @@
   "scripts": {
     "db:migrate": "node ./src/db-migrate.js",
     "db:query": "node ./src/db-query.js",
-    "pm:start": "pm2 start ./index.js --name 'survey-bot'",
+    "pm:start": "pm2 start ./server.js --name 'survey-bot'",
     "pm:stop": "pm2 stop survey-bot",
     "pm:list": "pm2 list",
     "pm:logs": "pm2 logs survey-bot",
