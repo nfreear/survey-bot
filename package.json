@@ -33,6 +33,7 @@
     "@MS/Cog-speech-sdk": "https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@1.17.0/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle-min.js"
   },
   "files": [
+    "public/**",
     "bot/*",
     "src/**",
     "src/plugins/*",

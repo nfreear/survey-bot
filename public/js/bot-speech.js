@@ -4,9 +4,9 @@
  * @copyright © Nick Freear, 04-May-2021.
  */
 
-import {
+/* import {
   createDictationRecognizerPonyfill, getDictationRecognizerConfig
-} from 'https://nfreear.github.io/dictation/src/index.js';
+} from 'https://nfreear.github.io/dictation/src/index.js'; */
 
 const {
   // createBrowserWebSpeechPonyfillFactory,
@@ -27,6 +27,7 @@ export class BotSpeech {
     const options = this.OPT;
     const useAdaptive = this.OPT.useAdaptive;
     // Was: const useDictation = this.OPT.useDictation;
+    const createRecognizerPonyfillFactory = this.OPT.createRecognizerPonyfillFactory;
 
     if (!options.subscriptionKey || /_/.test(options.subscriptionKey)) {
       document.body.className += 'error config-error';
@@ -50,7 +51,7 @@ export class BotSpeech {
 
     const ttsPonyfill = speechServicesPonyfillFactory();
 
-    const asrPonyfill = useAdaptive ? createDictationRecognizerPonyfill(options) : ttsPonyfill;
+    const asrPonyfill = useAdaptive ? createRecognizerPonyfillFactory(options) : ttsPonyfill;
 
     const ponyfill = {
       SpeechGrammarList: asrPonyfill.SpeechGrammarList,

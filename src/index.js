@@ -1,13 +1,11 @@
 /**
- * Re-usable exports from Survey-Bot.
+ * Re-usable CommonJS exports from the Survey-Bot backend.
  *
  * @copyright © Nick Freear 2021.
  */
 
 const SurveyBot = require('./plugins/survey-bot');
 const CFG = require('../bot-config.json');
-
-// @TODO? const { BotSpeech } = require('./public/js/bot-speech');
 
 const botConfig = {
   pathPipeline: CFG.pathPipeline,

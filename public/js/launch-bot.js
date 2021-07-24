@@ -3,6 +3,10 @@
  * @copyright © Nick Freear, 28-April-2021.
  */
 
+import {
+  createDictationRecognizerPonyfill
+} from 'https://nfreear.github.io/dictation/src/index.js';
+
 import { BotSpeech } from './bot-speech.js';
 
 const WebChat = window.WebChat;
@@ -12,7 +16,10 @@ const EVENT_RUN = 'surveyBot:run';
 const EVENT_INTRO_SENT = 'surveyBot:introSent';
 
 export async function launchBot (options = { speech: {} }) {
-  const speech = new BotSpeech(options.speech);
+  const speechOpt = options.speech;
+  speechOpt.createRecognizerPonyfillFactory = createDictationRecognizerPonyfill;
+
+  const speech = new BotSpeech(speechOpt);
 
   // https://github.com/microsoft/BotFramework-WebChat/issues/2377#issuecomment-527895197
   // https://github.com/microsoft/BotFramework-WebChat/tree/main/samples/04.api/b.piggyback-on-outgoing-activities#
