@@ -13,9 +13,9 @@ const { defaultContainer, Clonable } = require('@nlpjs/core');
 // Sub-resource integrity SRI hashes.
 const HASH = {
   // https://cdn.jsdelivr.net
-  speechSdk: 'sha256-psfl63lul/bQX9y0lE9MOSmbYDhMa0vF5hp5MKalgJs=',
+  speechSdk: 'sha256-3MdAqrhcGF93/hagMad554ZADRPxR8tbodfTd3tmY0Q=',
   // https://cdn.botframework.com
-  webchat: 'sha384-Xm4uX5+AacO2cl3ffEKrytyC+iHBSsNvXrJTTzodBhgkiuxIS0YWHGq1KFcf0Rr+'
+  webchat: 'sha384-hXz10Qsp8m3FpR+4hxcQCYezS77mZKSB/k/G62JsQqdgIAn23zLkarnuK+5Qrjz2'
 }
 
 const SECURITY_POLICY = [

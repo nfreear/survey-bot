@@ -27,10 +27,10 @@
     "pm2": "^4.5.6"
   },
   "x-CDN": {
-    "botframework-webchat": "4.13.0",
-    "microsoft-cognitiveservices-speech-sdk": "1.17.0",
-    "@MS/Webchat": "https://cdn.botframework.com/botframework-webchat/4.13.0/webchat.js",
-    "@MS/Cog-speech-sdk": "https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@1.17.0/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle-min.js"
+    "botframework-webchat": "4.14.0",
+    "microsoft-cognitiveservices-speech-sdk": "1.18.0",
+    "@MS/Webchat": "https://cdn.botframework.com/botframework-webchat/4.14.0/webchat.js",
+    "@MS/Cog-speech-sdk": "https://cdn.jsdelivr.net/npm/microsoft-cognitiveservices-speech-sdk@1.18.0/distrib/browser/microsoft.cognitiveservices.speech.sdk.bundle-min.js"
   },
   "files": [
     "public/**",
