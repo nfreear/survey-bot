@@ -24,7 +24,7 @@
   },
   "devDependencies": {
     "jest": "^27.0.6",
-    "pm2": "^4.5.6"
+    "pm2": "^5.2.0"
   },
   "x-CDN": {
     "botframework-webchat": "4.14.0",
